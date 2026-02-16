@@ -1,6 +1,6 @@
 import app from 'flarum/forum/app';
 import Model from 'flarum/common/Model';
-import Tag from 'flarum/tags/common/models/Tag';
+import Tag from 'ext:flarum/tags/common/models/Tag';
 import Discussion from 'flarum/common/models/Discussion';
 import BlogOverview from './pages/BlogOverview';
 import redirector from './utils/redirector';
@@ -8,7 +8,6 @@ import BlogMeta from '../common/Models/BlogMeta';
 import extendTagOverview from './utils/extendTagOverview';
 import discussionRouting from './utils/discussionRouting';
 import BlogComposer from './pages/BlogComposer';
-import compat from './compat';
 import addSidebarNav from './utils/addSidebarNav';
 
 import BlogItem from './pages/BlogItem';
@@ -57,4 +56,4 @@ app.initializers.add(
   -100000
 );
 
-compat();
+// Flarum 2.x: compat API has been removed.

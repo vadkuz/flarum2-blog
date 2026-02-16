@@ -1,5 +1,5 @@
 import Component from 'flarum/common/Component';
-import TagDiscussionModal from 'flarum/tags/components/TagDiscussionModal';
+import TagDiscussionModal from 'ext:flarum/tags/forum/components/TagDiscussionModal';
 import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
 import Alert from 'flarum/common/components/Alert';
 import Button from 'flarum/common/components/Button';
@@ -93,10 +93,9 @@ export default class BlogPostController extends Component {
     }
 
     // Update article SEO
-    if (article.blogMeta() && 'v17development-seo' in flarum.extensions && app.forum.attribute('canConfigureSeo')) {
-      const {
-        components: { MetaSeoModal },
-      } = require('@v17development-seo');
+    const seoExt = flarum.extensions['v17development-seo'];
+    const MetaSeoModal = seoExt && seoExt.components ? seoExt.components.MetaSeoModal : null;
+    if (article.blogMeta() && MetaSeoModal && app.forum.attribute('canConfigureSeo')) {
 
       items.add(
         'seo',

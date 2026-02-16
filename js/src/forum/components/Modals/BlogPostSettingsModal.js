@@ -70,32 +70,34 @@ export default class BlogPostSettingsModal extends Modal {
     let fofUploadButton = null;
 
     if ('fof-upload' in flarum.extensions && app.forum.attribute('fof-upload.canUpload')) {
-      const {
-        components: { Uploader, FileManagerModal },
-      } = require('@fof-upload');
+      const uploadExt = flarum.extensions['fof-upload'];
+      const Uploader = uploadExt && uploadExt.components ? uploadExt.components.Uploader : null;
+      const FileManagerModal = uploadExt && uploadExt.components ? uploadExt.components.FileManagerModal : null;
 
-      const uploader = new Uploader();
+      if (Uploader && FileManagerModal) {
+        const uploader = new Uploader();
 
-      fofUploadButton = (
-        <Button
-          class="Button Button--icon"
-          onclick={async () => {
-            app.modal.show(
-              FileManagerModal,
-              {
-                uploader: uploader,
-                onSelect: (files) => {
-                  const file = app.store.getById('files', files[0]);
+        fofUploadButton = (
+          <Button
+            class="Button Button--icon"
+            onclick={async () => {
+              app.modal.show(
+                FileManagerModal,
+                {
+                  uploader: uploader,
+                  onSelect: (files) => {
+                    const file = app.store.getById('files', files[0]);
 
-                  this.featuredImage(file.url());
+                    this.featuredImage(file.url());
+                  },
                 },
-              },
-              true
-            );
-          }}
-          icon="fas fa-cloud-upload-alt"
-        />
-      );
+                true
+              );
+            }}
+            icon="fas fa-cloud-upload-alt"
+          />
+        );
+      }
     }
 
     items.add(

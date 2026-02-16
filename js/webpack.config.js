@@ -1,5 +1,6 @@
 const config = require('flarum-webpack-config');
 
 module.exports = config({
-  useExtensions: ['fof-upload', 'fof-discussion-language', 'v17development-seo'],
+  // Flarum 2.x: `useExtensions` has been removed. Imports from other extensions
+  // must use the `ext:` prefix and are handled via the export registry.
 });

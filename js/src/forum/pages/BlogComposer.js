@@ -4,12 +4,11 @@ import Button from 'flarum/common/components/Button';
 import Link from 'flarum/common/components/Link';
 import BlogAuthor from '../components/BlogItemSidebar/BlogAuthor';
 import RenameArticleModal from '../components/Modals/RenameArticleModal';
-import TagDiscussionModal from 'flarum/tags/components/TagDiscussionModal';
+import TagDiscussionModal from 'ext:flarum/tags/forum/components/TagDiscussionModal';
 import BlogPostSettingsModal from '../components/Modals/BlogPostSettingsModal';
 import Composer from '../components/Composer/Composer';
 import ItemList from 'flarum/common/utils/ItemList';
 import Stream from 'flarum/common/utils/Stream';
-import { components } from '@fof-discussion-language';
 
 export default class BlogComposer extends Page {
   oninit(vnode) {
@@ -155,8 +154,9 @@ export default class BlogComposer extends Page {
     const blogImage = this.blogMeta && this.blogMeta.featuredImage() ? `url(${this.blogMeta.featuredImage()})` : defaultImage;
 
     let LanguageDropdown;
-    if ('fof-discussion-language' in flarum.extensions) {
-      LanguageDropdown = components.LanguageDropdown;
+    const discussionLanguage = flarum.extensions['fof-discussion-language'];
+    if (discussionLanguage && discussionLanguage.components && discussionLanguage.components.LanguageDropdown) {
+      LanguageDropdown = discussionLanguage.components.LanguageDropdown;
     }
 
     items.add(

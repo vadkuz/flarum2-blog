@@ -1,6 +1,6 @@
 import { extend } from 'flarum/common/extend';
 import IndexPage from 'flarum/forum/components/IndexPage';
-import TagsPage from 'flarum/tags/components/TagsPage';
+import TagsPage from 'ext:flarum/tags/forum/components/TagsPage';
 
 export default function extendTagOverview() {
   extend(TagsPage.prototype, 'view', function (markup) {

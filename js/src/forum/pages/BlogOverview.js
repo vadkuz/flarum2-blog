@@ -5,7 +5,6 @@ import Page from 'flarum/common/components/Page';
 import Button from 'flarum/common/components/Button';
 import BlogCategories from '../components/BlogCategories';
 import Link from 'flarum/common/components/Link';
-import { components } from '@fof-discussion-language';
 import ForumNav from '../components/ForumNav';
 import BlogOverviewItem from '../components/BlogOverviewItem';
 import FeaturedBlogItem from '../components/FeaturedBlogItem';
@@ -139,8 +138,9 @@ export default class BlogOverview extends Page {
       : null;
 
     let LanguageDropdown;
-    if ('fof-discussion-language' in flarum.extensions) {
-      LanguageDropdown = components.LanguageDropdown;
+    const discussionLanguage = flarum.extensions['fof-discussion-language'];
+    if (discussionLanguage && discussionLanguage.components && discussionLanguage.components.LanguageDropdown) {
+      LanguageDropdown = discussionLanguage.components.LanguageDropdown;
     }
 
     return [

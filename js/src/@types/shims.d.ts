@@ -6,8 +6,8 @@ declare module 'flarum/common/models/Discussion' {
   }
 }
 
-declare module 'flarum/tags/common/models/Tag' {
-  export default interface Discussion {
+declare module 'ext:flarum/tags/common/models/Tag' {
+  export default interface Tag {
     isBlog: () => boolean;
   }
 }
