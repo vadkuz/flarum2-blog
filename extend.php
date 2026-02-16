@@ -22,7 +22,7 @@ use V17Development\FlarumBlog\Controller\BlogComposerController;
 use V17Development\FlarumBlog\Access\ScopeDiscussionVisibility;
 // API controllers
 use V17Development\FlarumBlog\Api\AttachForumSerializerAttributes;
-use V17Development\FlarumBlog\Api\AttatchTagSerializerAttributes;
+use V17Development\FlarumBlog\Api\AttachTagSerializerAttributes;
 use V17Development\FlarumBlog\Api\Controller\CreateBlogMetaController;
 use V17Development\FlarumBlog\Api\Controller\UpdateBlogMetaController;
 use V17Development\FlarumBlog\Api\Controller\UploadDefaultBlogImageController;
@@ -50,7 +50,8 @@ $extend = [
         ->route('/blog', 'blog.overview', BlogOverviewController::class)
         ->route('/blog/compose', 'blog.compose', BlogComposerController::class)
         ->route('/blog/category/{category}', 'blog.category', BlogOverviewController::class)
-        ->route('/blog/{id:[\d\S]+(?:-[^/]*)?}', 'blog.post', BlogItemController::class)
+        // Match Flarum's default discussion slug routing: numeric id with optional slug.
+        ->route('/blog/{id:\\d+(?:-[^/]*)?}', 'blog.post', BlogItemController::class)
     // Shall we add RSS?
     // ->get('/blog/rss.xml', 'blog.rss.xml', RSS::class)
     ,
@@ -91,7 +92,7 @@ $extend = [
         ->attributes(AttachForumSerializerAttributes::class),
 
     (new Extend\ApiSerializer(TagSerializer::class))
-        ->attributes(AttatchTagSerializerAttributes::class),
+        ->attributes(AttachTagSerializerAttributes::class),
 
     (new Extend\Filter(DiscussionFilterer::class))
         ->addFilterMutator(FilterDiscussionsForBlogPosts::class),

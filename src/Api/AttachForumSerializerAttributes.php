@@ -3,8 +3,8 @@
 namespace V17Development\FlarumBlog\Api;
 
 use Flarum\Settings\SettingsRepositoryInterface;
-use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\ForumSerializer;
+use V17Development\FlarumBlog\Util\BlogTags;
 
 class AttachForumSerializerAttributes
 {
@@ -23,12 +23,11 @@ class AttachForumSerializerAttributes
     }
 
     /**
-     * @param Serializing $event
      */
     public function __invoke(ForumSerializer $serializer, $model, $attributes)
     {
         // Populate forum settings
-        $attributes['blogTags'] = explode("|", $this->settings->get('blog_tags', ''));
+        $attributes['blogTags'] = BlogTags::parseTagIds($this->settings->get('blog_tags', ''));
         $attributes['blogRedirectsEnabled'] = $this->settings->get('blog_redirects_enabled', 'both');
         $attributes['blogCommentsEnabled'] = $this->settings->get('blog_allow_comments', true);
         $attributes['blogHideTags'] = $this->settings->get('blog_hide_tags', true);

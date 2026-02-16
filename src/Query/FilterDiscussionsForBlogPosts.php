@@ -6,6 +6,7 @@ use Flarum\Filter\FilterState;
 use Flarum\Query\QueryCriteria;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Discussion\Search\Gambit\FulltextGambit;
+use V17Development\FlarumBlog\Util\BlogTags;
 
 class FilterDiscussionsForBlogPosts
 {
@@ -41,7 +42,7 @@ class FilterDiscussionsForBlogPosts
 
 		// Loop through the active gambits
 		foreach ($activeGambits as $gambit) {
-			if(get_class($gambit) === BlogGambit::class) {
+			if(get_class($gambit) === BlogArticleFilterGambit::class) {
 				$hideBlogPosts = false;
 			}
 			if(get_class($gambit) === FulltextGambit::class) {
@@ -51,18 +52,18 @@ class FilterDiscussionsForBlogPosts
 
 		// Filter discussions from discussion list
 		if($hideBlogPosts) {
-			$tagsArray = explode("|", $this->settings->get('blog_tags', ''));
+			$tagIds = BlogTags::parseTagIds($this->settings->get('blog_tags', ''));
+
+			if (count($tagIds) === 0) {
+				return;
+			}
 
 			$filter
 				->getQuery()
-				->where(function ($query) use ($tagsArray) {
-					foreach ($tagsArray as $tagId) {
-						$query->whereNotIn('discussions.id', function ($query) use ($tagId) {
-							$query->select('discussion_id')
-								->from('discussion_tag')
-								->where('tag_id', $tagId);
-						});
-					}
+				->whereNotIn('discussions.id', function ($query) use ($tagIds) {
+					$query->select('discussion_id')
+						->from('discussion_tag')
+						->whereIn('tag_id', $tagIds);
 				});
 		}
 	}

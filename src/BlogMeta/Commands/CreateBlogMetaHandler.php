@@ -85,7 +85,7 @@ class CreateBlogMetaHandler
         $blogMeta->is_sized = Arr::get($data, 'attributes.isSized', false);
 
         // Auto approve if an article already existed or it does not require a review
-        if ($discussion->created_at->diffInSeconds(\Carbon\Carbon::now()) > 30 || $this->settings->get('blog_requires_review', false) == false) {
+        if ($discussion->created_at->diffInSeconds(\Carbon\Carbon::now(), true) > 30 || $this->settings->get('blog_requires_review', false) == false) {
             $blogMeta->is_pending_review = false;
         } else {
             $blogMeta->is_pending_review = !$actor->can('blog.autoApprovePosts');

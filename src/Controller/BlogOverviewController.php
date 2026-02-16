@@ -6,8 +6,6 @@ use Flarum\Frontend\Document;
 use Flarum\Api\Client;
 use Flarum\Extension\ExtensionManager;
 use Psr\Http\Message\ServerRequestInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
-use Flarum\Tags\Tag;
 use Illuminate\Support\Arr;
 
 class BlogOverviewController
@@ -18,19 +16,13 @@ class BlogOverviewController
     protected $api;
 
     /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * @var ExtensionManager
      */
     protected $extensionManager;
 
-    public function __construct(Client $api, TranslatorInterface $translator, ExtensionManager $extensionManager)
+    public function __construct(Client $api, ExtensionManager $extensionManager)
     {
         $this->api = $api;
-        $this->translator = $translator;
         $this->extensionManager = $extensionManager;
     }
 

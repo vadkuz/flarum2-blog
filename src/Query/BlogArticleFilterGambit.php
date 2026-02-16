@@ -6,6 +6,7 @@ use Flarum\Search\AbstractRegexGambit;
 use Flarum\Search\SearchState;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Database\Query\Builder;
+use V17Development\FlarumBlog\Util\BlogTags;
 
 class BlogArticleFilterGambit extends AbstractRegexGambit
 {
@@ -30,16 +31,24 @@ class BlogArticleFilterGambit extends AbstractRegexGambit
 
     protected function conditions(SearchState $search, array $matches, $negate)
     {
-        $tagsArray = explode("|", $this->settings->get('blog_tags', ''));
+        $tagIds = BlogTags::parseTagIds($this->settings->get('blog_tags', ''));
 
-        $search->getQuery()->where(function (Builder $query) use ($tagsArray, $negate) {
-            foreach ($tagsArray as $tagId) {
-                $query->orWhereIn('discussions.id', function (Builder $query) use ($tagId) {
-                    $query->select('discussion_id')
-                        ->from('discussion_tag')
-                        ->where('tag_id', $tagId);
-                }, $negate);
+        // If no blog tags are configured, `is:blog` should match nothing.
+        // If negated (`-is:blog`), it should match everything.
+        if (count($tagIds) === 0) {
+            if (!$negate) {
+                $search->getQuery()->whereRaw('1 = 0');
             }
+
+            return;
+        }
+
+        $method = $negate ? 'whereNotIn' : 'whereIn';
+
+        $search->getQuery()->{$method}('discussions.id', function (Builder $query) use ($tagIds) {
+            $query->select('discussion_id')
+                ->from('discussion_tag')
+                ->whereIn('tag_id', $tagIds);
         });
     }
 }

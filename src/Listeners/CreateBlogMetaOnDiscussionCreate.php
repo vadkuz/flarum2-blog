@@ -9,6 +9,7 @@ use Flarum\Discussion\Event\Saving;
 use Flarum\Foundation\DispatchEventsTrait;
 use V17Development\FlarumBlog\BlogMeta\BlogMeta;
 use Illuminate\Support\Arr;
+use V17Development\FlarumBlog\Util\BlogTags;
 
 class CreateBlogMetaOnDiscussionCreate
 {
@@ -31,7 +32,7 @@ class CreateBlogMetaOnDiscussionCreate
         // Get Flarum settings
         $this->settings = $settings;
         $this->events = $events;
-        $this->blogTags = explode("|", $this->settings->get('blog_tags', ''));
+        $this->blogTags = BlogTags::parseTagIds($this->settings->get('blog_tags', ''));
     }
 
     /**
@@ -46,16 +47,33 @@ class CreateBlogMetaOnDiscussionCreate
             return;
         }
 
+        // If the incoming payload contains a blog tag, validate permissions before we persist anything.
+        // This avoids "create discussion, then fail afterSave" behavior.
+        $incomingTagIds = [];
+        foreach ((array) Arr::get($event->data, 'relationships.tags.data', []) as $tag) {
+            $id = (string) Arr::get($tag, 'id', '');
+            if ($id !== '' && ctype_digit($id)) {
+                $incomingTagIds[] = (int) $id;
+            }
+        }
+        $incomingTagIds = array_values(array_unique($incomingTagIds));
+
+        if (count($this->blogTags) > 0 && count(array_intersect($incomingTagIds, $this->blogTags)) > 0) {
+            if (!$event->actor->can('blog.writeArticles')) {
+                throw new PermissionDeniedException;
+            }
+        }
+
         // After the tags are synced, check if it's a blog article
         $discussion->afterSave(function ($discussion) use ($event) {
 
             // Here it may happen that `$discussion->tags` gives an empty array because of a strange bug.
             // This can be reproduced when using the fof/discussion-language extension (v1.2.1)
-            // For this reason we need to explictly reloag the tags relationship before using it here.
+            // For this reason we need to explicitly reload the tags relationship before using it here.
             $discussion->load('tags');
 
             // Make sure it's a blog base discussion!
-            if ($discussion->tags && $discussion->tags->whereIn('id', $this->blogTags)->count() > 0) {
+            if (count($this->blogTags) > 0 && $discussion->tags && $discussion->tags->whereIn('id', $this->blogTags)->count() > 0) {
                 if (!$event->actor->can('blog.writeArticles')) {
                     throw new PermissionDeniedException;
                 }
@@ -67,8 +85,8 @@ class CreateBlogMetaOnDiscussionCreate
                     $discussion->id,
                     Arr::get($event->data, 'attributes.blogMeta.featuredImage', null),
                     Arr::get($event->data, 'attributes.blogMeta.summary', null),
-                    Arr::get($event->data, 'attributes.blogMeta.isFeatured', null),
-                    Arr::get($event->data, 'attributes.blogMeta.isSized', null),
+                    Arr::get($event->data, 'attributes.blogMeta.isFeatured', false),
+                    Arr::get($event->data, 'attributes.blogMeta.isSized', false),
                     $isPendingReview
                 );
 

@@ -1,5 +1,5 @@
 import Page from 'flarum/common/components/Page';
-import IndexPage from 'flarum/components/IndexPage';
+import IndexPage from 'flarum/forum/components/IndexPage';
 import CommentPost from 'flarum/forum/components/CommentPost';
 import PostStream from 'flarum/forum/components/PostStream';
 import PostStreamState from 'flarum/forum/states/PostStreamState';

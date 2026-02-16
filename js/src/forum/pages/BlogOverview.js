@@ -1,6 +1,6 @@
 import app from 'flarum/forum/app';
 
-import IndexPage from 'flarum/components/IndexPage';
+import IndexPage from 'flarum/forum/components/IndexPage';
 import Page from 'flarum/common/components/Page';
 import Button from 'flarum/common/components/Button';
 import BlogCategories from '../components/BlogCategories';

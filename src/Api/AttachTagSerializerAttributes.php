@@ -2,17 +2,21 @@
 
 namespace V17Development\FlarumBlog\Api;
 
+use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 use V17Development\FlarumBlog\Util\BlogTags;
 
-class AttatchTagSerializerAttributes
+class AttachTagSerializerAttributes
 {
     /**
-     * @deprecated Use {@see AttachTagSerializerAttributes}. Kept for BC.
+     * @var SettingsRepositoryInterface
      */
     protected $settings;
 
-    public function __construct(\Flarum\Settings\SettingsRepositoryInterface $settings)
+    /**
+     * @param SettingsRepositoryInterface $settings
+     */
+    public function __construct(SettingsRepositoryInterface $settings)
     {
         $this->settings = $settings;
     }
@@ -30,3 +34,4 @@ class AttatchTagSerializerAttributes
         return $attributes;
     }
 }
+
