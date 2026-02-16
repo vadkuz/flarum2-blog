@@ -6,7 +6,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Flarum\Foundation\ValidationException;
 use Flarum\Discussion\DiscussionRepository;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Flarum\Locale\TranslatorInterface;
 use V17Development\FlarumBlog\BlogMeta\BlogMeta;
 use V17Development\FlarumBlog\BlogMeta\BlogMetaValidator;
 use Illuminate\Support\Arr;
