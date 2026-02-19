@@ -1,17 +1,17 @@
-import Modal from 'flarum/common/components/Modal';
+import app from 'flarum/admin/app';
+import FormModal from 'flarum/common/components/FormModal';
 import Button from 'flarum/common/components/Button';
 import Alert from 'flarum/common/components/Alert';
 import saveSettings from 'flarum/admin/utils/saveSettings';
 import Switch from 'flarum/common/components/Switch';
 
-export default class SelectCategoriesModal extends Modal {
+export default class SelectCategoriesModal extends FormModal {
   oninit(vnode) {
     super.oninit(vnode);
 
     this.blogCategoriesOriginal = app.data.settings.blog_tags ? app.data.settings.blog_tags.split('|') : [];
     this.blogCategories = app.data.settings.blog_tags ? app.data.settings.blog_tags.split('|') : [];
 
-    this.isSaving = false;
     this.hasChanges = false;
   }
 
@@ -36,14 +36,16 @@ export default class SelectCategoriesModal extends Modal {
 
           <table className={'FlarumBlog-TagsTable'}>
             <thead>
-              <th width="35"></th>
-              <th>Tag name</th>
-              <th width="50"></th>
+              <tr>
+                <th width="35"></th>
+                <th>Tag name</th>
+                <th width="50"></th>
+              </tr>
             </thead>
             <tbody>
               {app.store.all('tags').length === 0 && (
                 <tr>
-                  <td colspan="3">You currently have no tags.</td>
+                  <td colSpan="3">You currently have no tags.</td>
                 </tr>
               )}
 
@@ -83,7 +85,7 @@ export default class SelectCategoriesModal extends Modal {
           </table>
         </div>
         <div style="padding: 25px 30px; text-align: center;">
-          <Button type="submit" className="Button Button--primary" loading={this.loading}>
+          <Button type="submit" className="Button Button--primary" loading={this.loading} disabled={this.loading}>
             {this.hasChanges ? 'Save changes' : 'Close'}
           </Button>
         </div>
@@ -100,7 +102,7 @@ export default class SelectCategoriesModal extends Modal {
       return;
     }
 
-    this.isSaving = true;
+    this.loading = true;
 
     // Validate tags and prevent ghost tags (deleted tags)
     let validBlogTags = [];
@@ -135,7 +137,7 @@ export default class SelectCategoriesModal extends Modal {
         );
       })
       .then(() => {
-        this.isSaving = false;
+        this.loaded();
       });
   }
 }
