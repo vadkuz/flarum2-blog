@@ -3,15 +3,9 @@
 namespace Vadkuz\Flarum2Blog;
 
 // Flarum classes
-use Flarum\Api\Controller as FlarumController;
-use Flarum\Api\Serializer\BasicDiscussionSerializer;
-use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Extend;
 use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
-use Flarum\Discussion\Filter\DiscussionFilterer;
-use Flarum\Discussion\Search\DiscussionSearcher;
-use Flarum\Tags\Api\Serializer\TagSerializer;
 
 // Controllers
 use Vadkuz\Flarum2Blog\Controller\BlogOverviewController;
@@ -21,22 +15,15 @@ use Vadkuz\Flarum2Blog\Controller\BlogComposerController;
 // Access
 use Vadkuz\Flarum2Blog\Access\ScopeDiscussionVisibility;
 // API controllers
-use Vadkuz\Flarum2Blog\Api\AttachForumSerializerAttributes;
-use Vadkuz\Flarum2Blog\Api\AttachTagSerializerAttributes;
 use Vadkuz\Flarum2Blog\Api\Controller\CreateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UpdateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UploadDefaultBlogImageController;
 use Vadkuz\Flarum2Blog\Api\Controller\DeleteDefaultBlogImageController;
-use Vadkuz\Flarum2Blog\Api\Serializer\BlogMetaSerializer;
 // Listeners
 use Vadkuz\Flarum2Blog\Listeners\CreateBlogMetaOnDiscussionCreate;
 
 // Models
 use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
-
-// Filters
-use Vadkuz\Flarum2Blog\Query\FilterDiscussionsForBlogPosts;
-use Vadkuz\Flarum2Blog\Query\BlogArticleFilterGambit;
 
 // SEO
 use Vadkuz\Flarum2Blog\SeoPage\SeoBlogOverviewMeta;
@@ -72,33 +59,6 @@ $extend = [
 
     (new Extend\ModelVisibility(Discussion::class))
         ->scope(ScopeDiscussionVisibility::class),
-
-    (new Extend\ApiController(FlarumController\CreateDiscussionController::class))
-        ->addInclude(['blogMeta', 'firstPost', 'user']),
-
-    (new Extend\ApiController(FlarumController\ListDiscussionsController::class))
-        ->addInclude(['blogMeta', 'firstPost', 'user']),
-
-    (new Extend\ApiController(FlarumController\ShowDiscussionController::class))
-        ->addInclude(['blogMeta', 'firstPost', 'user']),
-
-    (new Extend\ApiController(FlarumController\UpdateDiscussionController::class))
-        ->addInclude(['blogMeta', 'firstPost', 'user']),
-
-    (new Extend\ApiSerializer(BasicDiscussionSerializer::class))
-        ->hasOne('blogMeta', BlogMetaSerializer::class),
-
-    (new Extend\ApiSerializer(ForumSerializer::class))
-        ->attributes(AttachForumSerializerAttributes::class),
-
-    (new Extend\ApiSerializer(TagSerializer::class))
-        ->attributes(AttachTagSerializerAttributes::class),
-
-    (new Extend\Filter(DiscussionFilterer::class))
-        ->addFilterMutator(FilterDiscussionsForBlogPosts::class),
-
-    (new Extend\SimpleFlarumSearch(DiscussionSearcher::class))
-        ->addGambit(BlogArticleFilterGambit::class),
 ];
 
 // Define events
