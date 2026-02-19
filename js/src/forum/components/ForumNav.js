@@ -1,5 +1,6 @@
 import Component from 'flarum/common/Component';
-import IndexPage from 'flarum/forum/components/IndexPage';
+import app from 'flarum/forum/app';
+import IndexSidebar from 'flarum/forum/components/IndexSidebar';
 import SelectDropdown from 'flarum/common/components/SelectDropdown';
 
 export default class ForumNav extends Component {
@@ -17,6 +18,6 @@ export default class ForumNav extends Component {
   }
 
   navItems() {
-    return IndexPage.prototype.navItems();
+    return IndexSidebar.prototype.navItems();
   }
 }
