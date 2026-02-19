@@ -1,20 +1,22 @@
-import ComposerBody from 'flarum/forum/components/ComposerBody';
+import Component from 'flarum/common/Component';
 import Button from 'flarum/common/components/Button';
 import TextEditor from 'flarum/common/components/TextEditor';
 import ComposerPreview from './ComposerPreview';
 import app from 'flarum/forum/app';
 
-export default class Composer extends ComposerBody {
+export default class Composer extends Component {
   oninit(vnode) {
     super.oninit(vnode);
-
+    this.composer = this.attrs.composer;
     this.previewContent = false;
   }
 
   // Render
   view() {
-    const hasContent = this.composer.fields.content() && this.composer.fields.content() !== '';
-    const loading = this.loading || this.attrs.disabled;
+    this.composer = this.attrs.composer;
+    const content = this.composer?.fields?.content ? this.composer.fields.content() : '';
+    const hasContent = content !== '';
+    const loading = !!this.attrs.disabled;
 
     return (
       <div className={`Flarum-Blog-Composer ${loading ? 'Flarum-Blog-Composer-Loading' : ''}`}>
@@ -41,10 +43,9 @@ export default class Composer extends ComposerBody {
             placeholder: this.attrs.placeholder,
             disabled: loading,
             composer: this.composer,
-            preview: this.jumpToPreview && this.jumpToPreview.bind(this),
-            onchange: this.composer.fields.content,
+            onchange: this.composer?.fields?.content,
             onsubmit: this.onsubmit.bind(this),
-            value: this.composer.fields.content(),
+            value: content,
           })}
         </div>
       </div>
