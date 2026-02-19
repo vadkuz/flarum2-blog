@@ -1,8 +1,8 @@
 import Component from 'flarum/common/Component';
 import Link from 'flarum/common/components/Link';
 import Tooltip from 'flarum/common/components/Tooltip';
+import Icon from 'flarum/common/components/Icon';
 import humanTime from 'flarum/common/helpers/humanTime';
-import icon from 'flarum/common/helpers/icon';
 import Discussion from 'flarum/common/models/Discussion';
 import ItemList from 'flarum/common/utils/ItemList';
 import classList from 'flarum/common/utils/classList';
@@ -33,11 +33,23 @@ export default class FeaturedBlogItem extends Component<Attrs> {
     // Sticky is an optional dependency, so we can't
     // assume method existence.
     if (article.isSticky?.()) {
-      items.add('sticky', <span class="BlogFeatured-list-item-isSticky dataItem">{icon('fas fa-thumbtack')}</span>, 80);
+      items.add(
+        'sticky',
+        <span class="BlogFeatured-list-item-isSticky dataItem">
+          <Icon name="fas fa-thumbtack" />
+        </span>,
+        80
+      );
     }
 
     if (article.blogMeta()?.isPendingReview?.() || article.isHidden()) {
-      items.add('hidden', <span class="BlogFeatured-list-item-isHidden dataItem">{icon('fas fa-eye-slash')}</span>, 60);
+      items.add(
+        'hidden',
+        <span class="BlogFeatured-list-item-isHidden dataItem">
+          <Icon name="fas fa-eye-slash" />
+        </span>,
+        60
+      );
     }
 
     if (article.blogMeta()?.isPendingReview?.()) {
@@ -45,7 +57,7 @@ export default class FeaturedBlogItem extends Component<Attrs> {
         'pendingReview',
         <Tooltip text={app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review')} position="bottom">
           <span class="BlogFeatured-list-item-pendingReview dataItem">
-            {icon('far fa-clock')} {app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review_title')}
+            <Icon name="far fa-clock" /> {app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review_title')}
           </span>
         </Tooltip>,
         40
@@ -63,7 +75,7 @@ export default class FeaturedBlogItem extends Component<Attrs> {
     items.add(
       'createdAt',
       <span class="BlogFeatured-list-item-details-createdAt">
-        {icon('far fa-clock')} {humanTime(article.createdAt())}
+        <Icon name="far fa-clock" /> {humanTime(article.createdAt())}
       </span>,
       100
     );
@@ -71,7 +83,7 @@ export default class FeaturedBlogItem extends Component<Attrs> {
     items.add(
       'author',
       <span class="BlogFeatured-list-item-details-author">
-        {icon('far fa-user')} {article.user()?.displayName() || app.translator.trans('core.lib.username.deleted_text')}
+        <Icon name="far fa-user" /> {article.user()?.displayName() || app.translator.trans('core.lib.username.deleted_text')}
       </span>,
       80
     );
@@ -79,7 +91,7 @@ export default class FeaturedBlogItem extends Component<Attrs> {
     items.add(
       'replies',
       <span class="BlogFeatured-list-item-details-replies">
-        {icon('far fa-comment')} {article.commentCount() - 1}
+        <Icon name="far fa-comment" /> {article.commentCount() - 1}
       </span>,
       60
     );

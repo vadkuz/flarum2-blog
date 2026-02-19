@@ -1,6 +1,6 @@
 .BlogSideWidget {
-  background: @body-bg;
-  box-shadow: 1px 3px 9px 0px @control-bg;
+  background: @blog-body-bg;
+  box-shadow: 1px 3px 9px 0px @blog-control-bg;
   border-radius: 3px;
   margin-bottom: 15px;
 
@@ -14,7 +14,7 @@
     display: block;
     padding: 10px 20px;
     text-decoration: none;
-    color: @control-color;
+    color: @blog-control-color;
 
     &.BlogSideWidget-item-child {
       padding-left: 45px;
@@ -34,13 +34,13 @@
     }
 
     &:hover {
-      background: @control-bg;
+      background: @blog-control-bg;
       text-decoration: none;
     }
   }
 }
 
-@media @tablet-up {
+@media @blog-tablet-up {
   .BlogSideWidget .sideNav {
     width: auto;
     margin-right: auto;
@@ -50,7 +50,7 @@
 
       &:hover,
       &.active {
-        background: @control-bg;
+        background: @blog-control-bg;
         text-decoration: none;
       }
     }

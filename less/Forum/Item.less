@@ -1,5 +1,5 @@
 .BlogItemPage {
-  background: @code-bg;
+  background: @blog-code-bg;
 
   @media screen and (min-width: 992px) {
     .App-composer {
@@ -38,8 +38,8 @@
       }
 
       .FlarumBlog-Article-Content {
-        background: @body-bg;
-        box-shadow: 1px 3px 9px 0px @control-bg;
+        background: @blog-body-bg;
+        box-shadow: 1px 3px 9px 0px @blog-control-bg;
       }
 
       .FlarumBlog-Article-Image {
@@ -87,7 +87,7 @@
           font-weight: 500;
           font-size: 15px;
           margin: 0 5px;
-          color: @primary-color !important;
+          color: @blog-primary-color !important;
 
           &:hover {
             text-decoration: underline;
@@ -117,10 +117,10 @@
           font-size: 14px;
           text-transform: uppercase;
           margin-bottom: 15px;
-          color: darken(@muted-more-color, 10%);
+          color: darken(@blog-muted-more-color, 10%);
 
-          & when (@config-dark-mode = true) {
-            color: @muted-more-color;
+          & when (@blog-config-dark-mode = true) {
+            color: @blog-muted-more-color;
           }
 
           &.FlarumBlog-Article-GhostPublishDate {
@@ -154,8 +154,8 @@
 
       .FlarumBlog-Article-Comments {
         padding: 30px;
-        background: @body-bg;
-        box-shadow: 1px 3px 9px 0px @control-bg;
+        background: @blog-body-bg;
+        box-shadow: 1px 3px 9px 0px @blog-control-bg;
         margin-top: 30px;
 
         .BlogArticleSubscription {
@@ -200,12 +200,12 @@
       }
 
       .FlarumBlog-Article-Author {
-        background: @body-bg;
-        box-shadow: 1px 3px 9px 0px @control-bg;
+        background: @blog-body-bg;
+        box-shadow: 1px 3px 9px 0px @blog-control-bg;
 
         .FlarumBlog-Article-Author-background {
           height: 130px;
-          background: @control-bg;
+          background: @blog-control-bg;
         }
 
         .FlarumBlog-Article-Author-Avatar {
@@ -219,7 +219,7 @@
             line-height: 100px;
             font-size: 40px;
             border-radius: 100px;
-            border: 5px solid @body-bg;
+            border: 5px solid @blog-body-bg;
           }
         }
 
@@ -234,7 +234,7 @@
           text-transform: uppercase;
           text-decoration: none;
           display: block;
-          color: @text-color;
+          color: @blog-text-color;
         }
 
         .FlarumBlog-Article-Author-Bio {
@@ -255,8 +255,8 @@
 .FlarumBlog-Article-GhostImage,
 .FlarumBlog-Author-Ghost,
 .FlarumBlog-Article-GhostPublishDate {
-  background: @control-bg;
-  color: @control-bg;
+  background: @blog-control-bg;
+  color: @blog-control-bg;
   animation: FlarumBlogGhostLoading 2s infinite;
   -webkit-touch-callout: none;
   -webkit-user-select: none;

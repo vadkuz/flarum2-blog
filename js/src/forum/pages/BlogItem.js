@@ -11,7 +11,7 @@ import fullTime from 'flarum/common/helpers/fullTime';
 import ArticleSubscription from '../components/ArticleSubscription';
 import classList from 'flarum/common/utils/classList';
 import ItemList from 'flarum/common/utils/ItemList';
-import icon from 'flarum/common/helpers/icon';
+import Icon from 'flarum/common/components/Icon';
 import app from 'flarum/forum/app';
 
 export default class BlogItem extends Page {
@@ -157,7 +157,7 @@ export default class BlogItem extends Page {
           <div className={'Post-body'}>
             <blockquote class="uncited" style={{ fontSize: '16px' }}>
               <div>
-                {icon('far fa-clock', { style: { marginRight: '5px' } })}{' '}
+                <Icon name="far fa-clock" style={{ marginRight: '5px' }} />{' '}
                 {app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review')}
               </div>
             </blockquote>
