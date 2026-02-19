@@ -39,14 +39,17 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
 
   // Add addPermissions
   extend(PermissionGrid.prototype, 'permissionItems', function (items) {
+    const extensionId = this.attrs?.extensionId;
+    const permissions = extensionId
+      ? app.extensionData.getExtensionPermissions(extensionId, 'blog')?.toArray?.() ?? []
+      : app.extensionData.getAllExtensionPermissions('blog').toArray();
+
     // Add blog permissions
     items.add(
       'blog',
       {
         label: app.translator.trans('vadkuz-flarum2-blog.admin.blog'),
-        children: this.attrs.extensionId
-          ? app.extensionData.getExtensionPermissions(this.extensionId, 'blog').toArray()
-          : app.extensionData.getAllExtensionPermissions('blog').toArray(),
+        children: permissions,
       },
       80
     );
