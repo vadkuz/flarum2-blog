@@ -1,61 +1,27 @@
 <?php
+
 namespace Vadkuz\Flarum2Blog\Api\Controller;
 
-use Flarum\Settings\SettingsRepositoryInterface;
-use Illuminate\Support\Str;
-use Illuminate\Support\Arr;
-use League\Flysystem\Adapter\Local;
-use League\Flysystem\Filesystem;
-use League\Flysystem\MountManager;
+use Flarum\Api\Controller\UploadImageController;
 use Psr\Http\Message\ServerRequestInterface;
-use Tobscure\JsonApi\Document;
-use Flarum\Api\Controller\ShowForumController;
-use Flarum\Foundation\Paths;
-use Flarum\Http\RequestUtil;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
 
-class UploadDefaultBlogImageController extends ShowForumController
+class UploadDefaultBlogImageController extends UploadImageController
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
-    protected $settings;
+    protected string $filePathSettingKey = 'blog_default_image_path';
+    protected string $filenamePrefix = 'blog_default_image';
 
-    /**
-     * @var Paths
-     */
-    protected $paths;
-
-    /**
-     * @param SettingsRepositoryInterface $settings
-     */
-    public function __construct(SettingsRepositoryInterface $settings, Paths $paths)
+    protected function makeImage(UploadedFileInterface $file): StreamInterface
     {
-        $this->settings = $settings;
-        $this->paths = $paths;
+        return $file->getStream();
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function data(ServerRequestInterface $request, Document $document)
+
+    protected function fileExtension(ServerRequestInterface $request, UploadedFileInterface $file): string
     {
-        RequestUtil::getActor($request)->assertAdmin();
+        $extension = strtolower(pathinfo((string) ($file->getClientFilename() ?? ''), PATHINFO_EXTENSION));
+        $allowed = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'avif'];
 
-        $file = Arr::get($request->getUploadedFiles(), 'blog_default_image');
-        $tmpFile = tempnam($this->paths->storage.'/tmp', 'blog-default');
-        $file->moveTo($tmpFile);
-
-        $mount = new MountManager([
-            'source' => new Filesystem(new Local(pathinfo($tmpFile, PATHINFO_DIRNAME))),
-            'target' => new Filesystem(new Local($this->paths->public.'/assets')),
-        ]);
-
-        if (($path = $this->settings->get('blog_default_image_path')) && $mount->has($file = "target://$path")) {
-            $mount->delete($file);
-        }
-
-        $uploadName = 'blog-default-'.Str::lower(Str::random(8)).'.png';
-        $mount->move('source://'.pathinfo($tmpFile, PATHINFO_BASENAME), "target://$uploadName");
-        $this->settings->set('blog_default_image_path', $uploadName);
-        return parent::data($request, $document);
+        return in_array($extension, $allowed, true) ? $extension : 'png';
     }
 }

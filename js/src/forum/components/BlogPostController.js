@@ -1,5 +1,4 @@
 import Component from 'flarum/common/Component';
-import TagDiscussionModal from 'ext:flarum/tags/forum/components/TagDiscussionModal';
 import DiscussionControls from 'flarum/forum/utils/DiscussionControls';
 import Alert from 'flarum/common/components/Alert';
 import Button from 'flarum/common/components/Button';
@@ -83,7 +82,7 @@ export default class BlogPostController extends Component {
         Button.component(
           {
             className: 'Button',
-            onclick: () => app.modal.show(TagDiscussionModal, { discussion: article }),
+            onclick: () => app.modal.show(() => import('ext:flarum/tags/forum/components/TagDiscussionModal'), { discussion: article }),
             icon: 'fas fa-tag',
           },
           app.translator.trans('vadkuz-flarum2-blog.forum.tools.update_category')

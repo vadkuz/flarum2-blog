@@ -1,6 +1,12 @@
 export default function () {
   // Save the original function before we override it
   const original_discussion_route = app.route.discussion;
+  const isBlogTag = (tag, blogTags) => {
+    const tagId = parseInt(tag.id?.(), 10);
+    const parentId = tag.parent?.() ? parseInt(tag.parent().id?.(), 10) : null;
+
+    return blogTags.includes(tagId) || (parentId !== null && blogTags.includes(parentId));
+  };
 
   /**
    * Generate a URL to a discussion OR a Blog Article.
@@ -19,10 +25,12 @@ export default function () {
       app.forum.attribute('blogRedirectsEnabled') === 'both' || app.forum.attribute('blogRedirectsEnabled') === 'discussions_only';
     let shouldRedirect = false;
     if (discussionRedirectEnabled && discussion.tags().length > 0) {
-      const blogTags = app.forum.attribute('blogTags');
+      const blogTags = (app.forum.attribute('blogTags') || [])
+        .map((tagId) => parseInt(tagId, 10))
+        .filter((tagId) => Number.isInteger(tagId));
 
       const foundTags = discussion.tags().filter((tag) => {
-        return blogTags.indexOf(tag.id()) >= 0 || (tag.parent() && blogTags.indexOf(tag.parent().id()) >= 0);
+        return isBlogTag(tag, blogTags);
       });
 
       if (foundTags.length > 0) {

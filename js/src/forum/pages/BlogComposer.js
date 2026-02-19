@@ -4,7 +4,6 @@ import Button from 'flarum/common/components/Button';
 import Link from 'flarum/common/components/Link';
 import BlogAuthor from '../components/BlogItemSidebar/BlogAuthor';
 import RenameArticleModal from '../components/Modals/RenameArticleModal';
-import TagDiscussionModal from 'ext:flarum/tags/forum/components/TagDiscussionModal';
 import BlogPostSettingsModal from '../components/Modals/BlogPostSettingsModal';
 import Composer from '../components/Composer/Composer';
 import ItemList from 'flarum/common/utils/ItemList';
@@ -63,7 +62,7 @@ export default class BlogComposer extends Page {
 
     if (this.isSaving) return;
 
-    app.modal.show(TagDiscussionModal, {
+    app.modal.show(() => import('ext:flarum/tags/forum/components/TagDiscussionModal'), {
       selectedTags: this.tags,
       onsubmit: (tags) => {
         this.tags = tags;
@@ -255,7 +254,9 @@ export default class BlogComposer extends Page {
   }
 
   create() {
-    const blogTags = app.forum.attribute('blogTags') || [];
+    const blogTags = (app.forum.attribute('blogTags') || [])
+      .map((tagId) => parseInt(tagId, 10))
+      .filter((tagId) => Number.isInteger(tagId));
 
     // Force tags
     if (this.tags.length === 0) {
@@ -271,7 +272,10 @@ export default class BlogComposer extends Page {
 
     // Find blog tags
     const findblogTags = this.tags.filter((tag) => {
-      return blogTags.indexOf(tag.id()) >= 0;
+      const tagId = parseInt(tag.id?.(), 10);
+      const parentId = tag.parent?.() ? parseInt(tag.parent().id?.(), 10) : null;
+
+      return blogTags.includes(tagId) || (parentId !== null && blogTags.includes(parentId));
     });
 
     // No blog tags selected
@@ -300,20 +304,44 @@ export default class BlogComposer extends Page {
       title: this.article.title(),
       content: app.composer.fields.content(),
       relationships,
-      blogMeta:
-        this.blogMeta !== null
-          ? {
-              featuredImage: this.blogMeta.featuredImage(),
-              summary: this.blogMeta.summary(),
-              isSized: this.blogMeta.isSized(),
-            }
-          : null,
     };
 
     this.isSaving = true;
 
+    const shouldCreateBlogMeta =
+      this.blogMeta !== null &&
+      (Boolean(this.blogMeta.featuredImage()) || Boolean(this.blogMeta.summary()) || Boolean(this.blogMeta.isSized()));
+
     this.article
       .save(data)
+      .then((article) => {
+        const syncBlogMeta = shouldCreateBlogMeta
+          ? app.request({
+              method: 'POST',
+              url: `${app.forum.attribute('apiUrl')}/blogMeta`,
+              body: {
+                data: {
+                  type: 'blogMeta',
+                  attributes: {
+                    featuredImage: this.blogMeta.featuredImage(),
+                    summary: this.blogMeta.summary(),
+                    isSized: this.blogMeta.isSized(),
+                  },
+                  relationships: {
+                    discussion: {
+                      data: {
+                        type: 'discussions',
+                        id: article.id(),
+                      },
+                    },
+                  },
+                },
+              },
+            }).catch(() => null)
+          : Promise.resolve(null);
+
+        return syncBlogMeta.then(() => article);
+      })
       .then((article) => {
         setTimeout(() => {
           // Redirect to the article

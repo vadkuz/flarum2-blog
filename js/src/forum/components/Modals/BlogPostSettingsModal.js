@@ -38,7 +38,9 @@ export default class BlogPostSettingsModal extends Modal {
   content() {
     return (
       <div className="Modal-body">
-        <div className="Form">{this.fields().toArray()}</div>
+        <form className="Form" onsubmit={this.onsubmit.bind(this)}>
+          {this.fields().toArray()}
+        </form>
       </div>
     );
   }

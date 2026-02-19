@@ -1,7 +1,6 @@
 import Page from 'flarum/common/components/Page';
 import IndexPage from 'flarum/forum/components/IndexPage';
 import CommentPost from 'flarum/forum/components/CommentPost';
-import PostStream from 'flarum/forum/components/PostStream';
 import PostStreamState from 'flarum/forum/states/PostStreamState';
 import BlogPostController from '../components/BlogPostController';
 import BlogItemSidebar from '../components/BlogItemSidebar/BlogItemSidebar';
@@ -30,8 +29,18 @@ export default class BlogItem extends Page {
     this.loading = true;
     this.found = false;
     this.article = null;
+    this.PostStream = null;
+
+    this.loadPostStreamComponent();
 
     this.loadBlogItem();
+  }
+
+  loadPostStreamComponent() {
+    import('flarum/forum/components/PostStream').then((module) => {
+      this.PostStream = module.default;
+      m.redraw();
+    });
   }
 
   // Load blog overview
@@ -248,11 +257,9 @@ export default class BlogItem extends Page {
 
           {!this.loading &&
             this.article &&
-            PostStream.component({
-              discussion: this.article,
-              stream: this.stream,
-              onPositionChange: this.positionChanged.bind(this),
-            })}
+            this.PostStream && (
+              <this.PostStream discussion={this.article} stream={this.stream} onPositionChange={this.positionChanged.bind(this)} />
+            )}
         </div>,
         75
       );
