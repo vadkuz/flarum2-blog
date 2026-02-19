@@ -1,16 +1,16 @@
 <?php
 
-namespace V17Development\FlarumBlog\BlogMeta\Commands;
+namespace Vadkuz\Flarum2Blog\BlogMeta\Commands;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Flarum\Discussion\DiscussionRepository;
 use Flarum\Foundation\DispatchEventsTrait;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use V17Development\FlarumBlog\BlogMeta\BlogMeta;
-use V17Development\FlarumBlog\BlogMeta\BlogMetaValidator;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMetaValidator;
 use Illuminate\Support\Arr;
-use V17Development\FlarumBlog\Event\BlogMetaSaving;
+use Vadkuz\Flarum2Blog\Event\BlogMetaSaving;
 
 class CreateBlogMetaHandler
 {

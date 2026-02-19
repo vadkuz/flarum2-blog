@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\BlogMeta\Commands;
+namespace Vadkuz\Flarum2Blog\BlogMeta\Commands;
 
 use Flarum\User\User;
 use Flarum\Discussion\Discussion;

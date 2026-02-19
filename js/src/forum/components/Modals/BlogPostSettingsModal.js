@@ -32,7 +32,7 @@ export default class BlogPostSettingsModal extends Modal {
   }
 
   title() {
-    return app.translator.trans('v17development-flarum-blog.forum.article_settings.title');
+    return app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.title');
   }
 
   content() {
@@ -49,7 +49,7 @@ export default class BlogPostSettingsModal extends Modal {
     items.add(
       'summary',
       <div className="Form-group">
-        <label>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.summary.title')}:</label>
+        <label>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.summary.title')}:</label>
         <textarea
           className="FormControl"
           style={{
@@ -59,10 +59,10 @@ export default class BlogPostSettingsModal extends Modal {
             minHeight: '120px',
           }}
           bidi={this.summary}
-          placeholder={app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.summary.placeholder')}
+          placeholder={app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.summary.placeholder')}
         />
 
-        <small>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.summary.helper_text')}</small>
+        <small>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.summary.helper_text')}</small>
       </div>,
       30
     );
@@ -103,19 +103,19 @@ export default class BlogPostSettingsModal extends Modal {
     items.add(
       'image',
       <div className="Form-group V17Blog-ArticleImage">
-        <label>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.image.title')}:</label>
+        <label>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.title')}:</label>
         <div data-upload-enabled={!!fofUploadButton}>
           <input type="text" className="FormControl" bidi={this.featuredImage} placeholder="https://" />
           {fofUploadButton}
         </div>
 
-        <small>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.image.helper_text')}</small>
+        <small>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.helper_text')}</small>
 
         {this.featuredImage() !== '' && (
           <img
             src={this.featuredImage()}
             alt="Article image"
-            title={app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.image.title')}
+            title={app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.title')}
             style={{ width: '100%', marginTop: '15px' }}
           />
         )}
@@ -134,9 +134,9 @@ export default class BlogPostSettingsModal extends Modal {
             },
           },
           [
-            <b>{app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.highlight.title')}</b>,
+            <b>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.highlight.title')}</b>,
             <div className="helpText" style={{ fontWeight: 500 }}>
-              {app.translator.trans('v17development-flarum-blog.forum.article_settings.fields.highlight.helper_text')}
+              {app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.highlight.helper_text')}
             </div>,
           ]
         )}

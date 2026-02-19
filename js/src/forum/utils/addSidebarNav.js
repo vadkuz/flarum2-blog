@@ -8,7 +8,7 @@ export default function addSidebarNav() {
       items.add(
         'blog',
         <LinkButton icon="fas fa-comment" href={app.route('blog')}>
-          {app.translator.trans('v17development-flarum-blog.forum.blog')}
+          {app.translator.trans('vadkuz-flarum2-blog.forum.blog')}
         </LinkButton>,
         15
       );

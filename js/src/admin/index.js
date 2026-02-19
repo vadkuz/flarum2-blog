@@ -12,7 +12,7 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
     .registerPermission(
       {
         icon: 'fas fa-pencil-alt',
-        label: app.translator.trans('v17development-flarum-blog.admin.permissions.write_articles'),
+        label: app.translator.trans('vadkuz-flarum2-blog.admin.permissions.write_articles'),
         permission: 'blog.writeArticles',
       },
       'blog',
@@ -21,7 +21,7 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
     .registerPermission(
       {
         icon: 'far fa-star',
-        label: app.translator.trans('v17development-flarum-blog.admin.permissions.auto_approve_posts'),
+        label: app.translator.trans('vadkuz-flarum2-blog.admin.permissions.auto_approve_posts'),
         permission: 'blog.autoApprovePosts',
       },
       'blog',
@@ -30,7 +30,7 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
     .registerPermission(
       {
         icon: 'far fa-thumbs-up',
-        label: app.translator.trans('v17development-flarum-blog.admin.permissions.approve_posts'),
+        label: app.translator.trans('vadkuz-flarum2-blog.admin.permissions.approve_posts'),
         permission: 'blog.canApprovePosts',
       },
       'blog',
@@ -43,7 +43,7 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
     items.add(
       'blog',
       {
-        label: app.translator.trans('v17development-flarum-blog.admin.blog'),
+        label: app.translator.trans('vadkuz-flarum2-blog.admin.blog'),
         children: this.attrs.extensionId
           ? app.extensionData.getExtensionPermissions(this.extensionId, 'blog').toArray()
           : app.extensionData.getAllExtensionPermissions('blog').toArray(),
@@ -55,7 +55,7 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
   extend(BasicsPage.prototype, 'homePageItems', (items) => {
     items.add('blog', {
       path: '/blog',
-      label: app.translator.trans('v17development-flarum-blog.admin.blog'),
+      label: app.translator.trans('vadkuz-flarum2-blog.admin.blog'),
     });
   });
 });

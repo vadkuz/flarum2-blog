@@ -1,11 +1,11 @@
 <?php
 
-namespace V17Development\FlarumBlog\Subscribers;
+namespace Vadkuz\Flarum2Blog\Subscribers;
 
 use Flarum\Discussion\Event as DiscussionEvent;
-use V17Development\FlarumBlog\BlogMeta\BlogMeta;
-use V17Development\FlarumBlog\Event\BlogMetaCreated;
-use V17Development\FlarumBlog\Event\BlogMetaSaving;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\Event\BlogMetaCreated;
+use Vadkuz\Flarum2Blog\Event\BlogMetaSaving;
 use V17Development\FlarumSeo\SeoMeta\SeoMeta;
 use V17Development\FlarumSeo\SeoProperties;
 use V17Development\FlarumSeo\SeoMeta\Event\Created;
@@ -142,9 +142,9 @@ class SeoBlogSubscriber
         $seoMeta->description = $blogMeta->summary;
 
         // Only update image if source was set to auto and is not managed by a different extension
-        if (!$seoMeta->open_graph_image_source || $seoMeta->open_graph_image_source === 'auto' || $seoMeta->open_graph_image_source === 'v17development-flarum-blog') {
+        if (!$seoMeta->open_graph_image_source || $seoMeta->open_graph_image_source === 'auto' || $seoMeta->open_graph_image_source === 'vadkuz-flarum2-blog') {
             $seoMeta->open_graph_image = $blogMeta->featured_image;
-            $seoMeta->open_graph_image_source = "v17development-flarum-blog";
+            $seoMeta->open_graph_image_source = "vadkuz-flarum2-blog";
         }
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace V17Development\FlarumBlog\Query;
+namespace Vadkuz\Flarum2Blog\Query;
 
 use Flarum\Filter\FilterState;
 use Flarum\Query\QueryCriteria;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Discussion\Search\Gambit\FulltextGambit;
-use V17Development\FlarumBlog\Util\BlogTags;
+use Vadkuz\Flarum2Blog\Util\BlogTags;
 
 class FilterDiscussionsForBlogPosts
 {

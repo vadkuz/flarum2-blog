@@ -1,14 +1,14 @@
 <?php
 
-namespace V17Development\FlarumBlog\Api\Controller;
+namespace Vadkuz\Flarum2Blog\Api\Controller;
 
 use Flarum\Api\Controller\AbstractCreateController;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
-use V17Development\FlarumBlog\Api\Serializer\BlogMetaSerializer;
-use V17Development\FlarumBlog\BlogMeta\Commands\CreateBlogMeta;
+use Vadkuz\Flarum2Blog\Api\Serializer\BlogMetaSerializer;
+use Vadkuz\Flarum2Blog\BlogMeta\Commands\CreateBlogMeta;
 use Flarum\Http\RequestUtil;
 
 class CreateBlogMetaController extends AbstractCreateController

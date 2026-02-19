@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\SeoPage;
+namespace Vadkuz\Flarum2Blog\SeoPage;
 
 use Flarum\Discussion\DiscussionRepository;
 use Flarum\Foundation\DispatchEventsTrait;
@@ -81,7 +81,7 @@ class SeoBlogArticleMeta implements PageDriverInterface
             // Find discussion
             $discussion = $this->discussionRepository->findOrFail($discussionId);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            $properties->setTitle($this->translator->trans('v17development-flarum-blog.forum.blog'));
+            $properties->setTitle($this->translator->trans('vadkuz-flarum2-blog.forum.blog'));
             // Do nothing, no model found
             return;
         }
@@ -123,6 +123,6 @@ class SeoBlogArticleMeta implements PageDriverInterface
         $properties->setCanonicalUrl($fullArticleUrl, false);
 
         // Set blog article title
-        $properties->setTitle($seoMeta->title . " - " . $this->translator->trans('v17development-flarum-blog.forum.blog'));
+        $properties->setTitle($seoMeta->title . " - " . $this->translator->trans('vadkuz-flarum2-blog.forum.blog'));
     }
 }

@@ -43,9 +43,9 @@ export default class FeaturedBlogItem extends Component<Attrs> {
     if (article.blogMeta()?.isPendingReview?.()) {
       items.add(
         'pendingReview',
-        <Tooltip text={app.translator.trans('v17development-flarum-blog.forum.review_article.pending_review')} position="bottom">
+        <Tooltip text={app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review')} position="bottom">
           <span class="BlogFeatured-list-item-pendingReview dataItem">
-            {icon('far fa-clock')} {app.translator.trans('v17development-flarum-blog.forum.review_article.pending_review_title')}
+            {icon('far fa-clock')} {app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review_title')}
           </span>
         </Tooltip>,
         40

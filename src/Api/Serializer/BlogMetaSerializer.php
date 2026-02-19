@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\Api\Serializer;
+namespace Vadkuz\Flarum2Blog\Api\Serializer;
 
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\DiscussionSerializer;

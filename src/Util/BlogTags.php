@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\Util;
+namespace Vadkuz\Flarum2Blog\Util;
 
 final class BlogTags
 {

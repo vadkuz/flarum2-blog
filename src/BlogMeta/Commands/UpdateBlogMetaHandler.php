@@ -1,16 +1,16 @@
 <?php
 
-namespace V17Development\FlarumBlog\BlogMeta\Commands;
+namespace Vadkuz\Flarum2Blog\BlogMeta\Commands;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Flarum\Foundation\ValidationException;
 use Flarum\Discussion\DiscussionRepository;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\Locale\TranslatorInterface;
-use V17Development\FlarumBlog\BlogMeta\BlogMeta;
-use V17Development\FlarumBlog\BlogMeta\BlogMetaValidator;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMetaValidator;
 use Illuminate\Support\Arr;
-use V17Development\FlarumBlog\Event\BlogMetaSaving;
+use Vadkuz\Flarum2Blog\Event\BlogMetaSaving;
 
 class UpdateBlogMetaHandler
 {
@@ -66,7 +66,7 @@ class UpdateBlogMetaHandler
         if (empty($command->id) || !is_numeric($command->id)) {
             throw new ValidationException([
                 'message' => $this->translator->trans(
-                    'v17development-flarum-blog.forum.validation.missing_id'
+                    'vadkuz-flarum2-blog.forum.validation.missing_id'
                 )
             ]);
         }

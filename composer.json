@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "V17Development\\FlarumBlog\\": "src/"
+      "Vadkuz\\Flarum2Blog\\": "src/"
     }
   },
   "require": {

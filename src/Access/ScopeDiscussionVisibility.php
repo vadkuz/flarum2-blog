@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\Access;
+namespace Vadkuz\Flarum2Blog\Access;
 
 use Flarum\User\User;
 use Illuminate\Database\Eloquent\Builder;

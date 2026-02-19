@@ -20,17 +20,17 @@ export default class Composer extends ComposerBody {
       <div className={`Flarum-Blog-Composer ${loading ? 'Flarum-Blog-Composer-Loading' : ''}`}>
         <div className={'Flarum-Blog-Composer-tabs'}>
           <Button className={!this.previewContent && 'AricleComposerButtonSelected'} onclick={() => (this.previewContent = false)}>
-            {app.translator.trans('v17development-flarum-blog.forum.composer.write')}
+            {app.translator.trans('vadkuz-flarum2-blog.forum.composer.write')}
           </Button>
           <Button className={this.previewContent && 'AricleComposerButtonSelected'} onclick={() => (this.previewContent = true)}>
-            {app.translator.trans('v17development-flarum-blog.forum.composer.view')}
+            {app.translator.trans('vadkuz-flarum2-blog.forum.composer.view')}
           </Button>
         </div>
 
         <div className={`Composer Flarum-Blog-Composer-body ${this.previewContent ? 'Flarum-Blog-Composer-HideEditor' : ''}`}>
           {this.previewContent && (
             <div className={'Flarum-Blog-Composer-preview'}>
-              {!hasContent && app.translator.trans('v17development-flarum-blog.forum.composer.nothing_to_preview')}
+              {!hasContent && app.translator.trans('vadkuz-flarum2-blog.forum.composer.nothing_to_preview')}
 
               <ComposerPreview content={this.composer.fields.content()} />
             </div>

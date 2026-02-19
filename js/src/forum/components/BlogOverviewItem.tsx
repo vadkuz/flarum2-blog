@@ -29,7 +29,7 @@ export default class BlogOverviewItem extends Component<Attrs> {
     if (article.blogMeta()?.isPendingReview?.()) {
       items.add(
         'pendingReview',
-        <Tooltip text={app.translator.trans('v17development-flarum-blog.forum.review_article.pending_review')}>
+        <Tooltip text={app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review')}>
           {icon('far fa-clock', { class: 'BlogList-item-pendingReview' })}
         </Tooltip>,
         40

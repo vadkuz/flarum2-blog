@@ -1,12 +1,12 @@
 <?php
 
-namespace V17Development\FlarumBlog\BlogMeta;
+namespace Vadkuz\Flarum2Blog\BlogMeta;
 
 use Flarum\Database\AbstractModel;
 use Flarum\Database\ScopeVisibilityTrait;
 use Flarum\Discussion\Discussion;
 use Flarum\Foundation\EventGeneratorTrait;
-use V17Development\FlarumBlog\Event\BlogMetaCreated;
+use Vadkuz\Flarum2Blog\Event\BlogMetaCreated;
 
 class BlogMeta extends AbstractModel
 {

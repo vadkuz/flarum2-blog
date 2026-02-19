@@ -36,7 +36,7 @@ export default class BlogPostController extends Component {
             onclick: () => app.modal.show(RenameArticleModal, { article }),
             icon: 'fas fa-pencil-alt',
           },
-          app.translator.trans('v17development-flarum-blog.forum.tools.rename_article')
+          app.translator.trans('vadkuz-flarum2-blog.forum.tools.rename_article')
         ),
         100
       );
@@ -57,7 +57,7 @@ export default class BlogPostController extends Component {
           },
           icon: 'fas fa-edit',
         },
-        app.translator.trans('v17development-flarum-blog.forum.tools.edit_article')
+        app.translator.trans('vadkuz-flarum2-blog.forum.tools.edit_article')
       ),
       90
     );
@@ -71,7 +71,7 @@ export default class BlogPostController extends Component {
           onclick: () => app.modal.show(BlogPostSettingsModal, { article }),
           icon: 'fas fa-cogs',
         },
-        app.translator.trans('v17development-flarum-blog.forum.tools.article_settings')
+        app.translator.trans('vadkuz-flarum2-blog.forum.tools.article_settings')
       ),
       80
     );
@@ -86,7 +86,7 @@ export default class BlogPostController extends Component {
             onclick: () => app.modal.show(TagDiscussionModal, { discussion: article }),
             icon: 'fas fa-tag',
           },
-          app.translator.trans('v17development-flarum-blog.forum.tools.update_category')
+          app.translator.trans('vadkuz-flarum2-blog.forum.tools.update_category')
         ),
         70
       );
@@ -136,7 +136,7 @@ export default class BlogPostController extends Component {
                     app.alerts.show(
                       Alert,
                       { type: 'success' },
-                      app.translator.trans('v17development-flarum-blog.forum.review_article.approve_article_approved')
+                      app.translator.trans('vadkuz-flarum2-blog.forum.review_article.approve_article_approved')
                     );
                   },
                   (response) => {
@@ -147,7 +147,7 @@ export default class BlogPostController extends Component {
             },
             icon: 'fas fa-thumbs-up',
           },
-          app.translator.trans('v17development-flarum-blog.forum.review_article.approve_article')
+          app.translator.trans('vadkuz-flarum2-blog.forum.review_article.approve_article')
         ),
         60
       );
@@ -181,8 +181,8 @@ export default class BlogPostController extends Component {
             icon: `fas ${article.isLocked() ? 'fa-comments' : 'fa-comment-slash'}`,
           },
           article.isLocked()
-            ? app.translator.trans('v17development-flarum-blog.forum.tools.enable_comments')
-            : app.translator.trans('v17development-flarum-blog.forum.tools.disable_comments')
+            ? app.translator.trans('vadkuz-flarum2-blog.forum.tools.enable_comments')
+            : app.translator.trans('vadkuz-flarum2-blog.forum.tools.disable_comments')
         ),
         30
       );
@@ -201,7 +201,7 @@ export default class BlogPostController extends Component {
               onclick: DiscussionControls.restoreAction.bind(article),
               icon: 'fas fa-eye',
             },
-            app.translator.trans('v17development-flarum-blog.forum.tools.recover_article')
+            app.translator.trans('vadkuz-flarum2-blog.forum.tools.recover_article')
           ),
           20
         );
@@ -232,7 +232,7 @@ export default class BlogPostController extends Component {
                 },
                 icon: 'far fa-trash-alt',
               },
-              app.translator.trans('v17development-flarum-blog.forum.tools.delete_forever')
+              app.translator.trans('vadkuz-flarum2-blog.forum.tools.delete_forever')
             ),
             10
           );
@@ -247,7 +247,7 @@ export default class BlogPostController extends Component {
               onclick: DiscussionControls.hideAction.bind(article),
               icon: 'fas fa-eye-slash',
             },
-            app.translator.trans('v17development-flarum-blog.forum.tools.hide_article')
+            app.translator.trans('vadkuz-flarum2-blog.forum.tools.hide_article')
           ),
           0
         );

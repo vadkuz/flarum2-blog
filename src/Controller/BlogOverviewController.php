@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\Controller;
+namespace Vadkuz\Flarum2Blog\Controller;
 
 use Flarum\Frontend\Document;
 use Flarum\Api\Client;

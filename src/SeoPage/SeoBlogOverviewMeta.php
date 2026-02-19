@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog\SeoPage;
+namespace Vadkuz\Flarum2Blog\SeoPage;
 
 use Flarum\Foundation\DispatchEventsTrait;
 use Flarum\Tags\Tag;
@@ -66,9 +66,9 @@ class SeoBlogOverviewMeta implements PageDriverInterface
         try {
             $category = Tag::where('slug', $category)->firstOrFail();
 
-            $properties->setTitle($this->translator->trans('v17development-flarum-blog.forum.blog'));
+            $properties->setTitle($this->translator->trans('vadkuz-flarum2-blog.forum.blog'));
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            $properties->setTitle($this->translator->trans('v17development-flarum-blog.forum.blog'));
+            $properties->setTitle($this->translator->trans('vadkuz-flarum2-blog.forum.blog'));
 
             // Do nothing, no model found
             return;
@@ -86,6 +86,6 @@ class SeoBlogOverviewMeta implements PageDriverInterface
         $properties->generateTagsFromMetaData($seoMeta);
 
         // Set blog title
-        $properties->setTitle($seoMeta->title . " - " . $this->translator->trans('v17development-flarum-blog.forum.blog'));
+        $properties->setTitle($seoMeta->title . " - " . $this->translator->trans('vadkuz-flarum2-blog.forum.blog'));
     }
 }

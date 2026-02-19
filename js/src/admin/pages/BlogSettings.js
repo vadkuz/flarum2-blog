@@ -39,17 +39,17 @@ export default class BlogSettings extends ExtensionPage {
         <div className="container">
           <div className={'FlarumBlog-SelectCategories'}>
             {blogCategoriesCount === 0
-              ? app.translator.trans('v17development-flarum-blog.admin.settings.no_categories_selected')
-              : app.translator.trans('v17development-flarum-blog.admin.settings.selected_category_count', { count: blogCategoriesCount })}
+              ? app.translator.trans('vadkuz-flarum2-blog.admin.settings.no_categories_selected')
+              : app.translator.trans('vadkuz-flarum2-blog.admin.settings.selected_category_count', { count: blogCategoriesCount })}
 
             <Button className="Button" onclick={() => app.modal.show(SelectCategoriesModal)}>
-              {app.translator.trans('v17development-flarum-blog.admin.settings.select_categories_button')}
+              {app.translator.trans('vadkuz-flarum2-blog.admin.settings.select_categories_button')}
             </Button>
           </div>
 
           {FieldSet.component(
             {
-              label: app.translator.trans('v17development-flarum-blog.admin.settings.blog_heading'),
+              label: app.translator.trans('vadkuz-flarum2-blog.admin.settings.blog_heading'),
             },
             [
               Switch.component(
@@ -61,8 +61,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.allow_comments_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.allow_comments_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.allow_comments_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.allow_comments_text')}</div>,
                 ]
               ),
               Switch.component(
@@ -74,8 +74,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.require_review_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.require_review_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.require_review_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.require_review_text')}</div>,
                 ]
               ),
               Switch.component(
@@ -87,8 +87,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.hide_on_discussion_list_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.hide_on_discussion_list_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.hide_on_discussion_list_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.hide_on_discussion_list_text')}</div>,
                 ]
               ),
               Switch.component(
@@ -100,8 +100,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.add_sidebar_nav_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.add_sidebar_nav_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.add_sidebar_nav_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.add_sidebar_nav_text')}</div>,
                 ]
               ),
               Switch.component(
@@ -113,14 +113,14 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.add_hero_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.add_hero_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.add_hero_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.add_hero_text')}</div>,
                 ]
               ),
 
               <div className="Form-group">
-                {<label>{app.translator.trans('v17development-flarum-blog.admin.settings.featured_count_label')}</label>}
-                <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.featured_count_text')}</div>
+                {<label>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.featured_count_label')}</label>}
+                <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.featured_count_text')}</div>
                 <input
                   class="FormControl"
                   value={this.featuredCount}
@@ -137,7 +137,7 @@ export default class BlogSettings extends ExtensionPage {
 
           {FieldSet.component(
             {
-              label: app.translator.trans('v17development-flarum-blog.admin.settings.categories_heading'),
+              label: app.translator.trans('vadkuz-flarum2-blog.admin.settings.categories_heading'),
             },
             [
               Switch.component(
@@ -149,8 +149,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.hide_tags_in_taglist_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.hide_tags_in_taglist_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.hide_tags_in_taglist_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.hide_tags_in_taglist_text')}</div>,
                 ]
               ),
               Switch.component(
@@ -162,8 +162,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.show_tag_hierarchy_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.show_tag_hierarchy_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.show_tag_hierarchy_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.show_tag_hierarchy_text')}</div>,
                 ]
               ),
             ]
@@ -171,7 +171,7 @@ export default class BlogSettings extends ExtensionPage {
 
           {FieldSet.component(
             {
-              label: app.translator.trans('v17development-flarum-blog.admin.settings.redirects_heading'),
+              label: app.translator.trans('vadkuz-flarum2-blog.admin.settings.redirects_heading'),
             },
             [
               Switch.component(
@@ -197,8 +197,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.redirect_articles_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.redirect_articles_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.redirect_articles_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.redirect_articles_text')}</div>,
                 ]
               ),
               Switch.component(
@@ -224,8 +224,8 @@ export default class BlogSettings extends ExtensionPage {
                   },
                 },
                 [
-                  <b>{app.translator.trans('v17development-flarum-blog.admin.settings.redirect_tags_label')}</b>,
-                  <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.redirect_tags_text')}</div>,
+                  <b>{app.translator.trans('vadkuz-flarum2-blog.admin.settings.redirect_tags_label')}</b>,
+                  <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.redirect_tags_text')}</div>,
                 ]
               ),
             ]
@@ -233,10 +233,10 @@ export default class BlogSettings extends ExtensionPage {
 
           {FieldSet.component(
             {
-              label: app.translator.trans('v17development-flarum-blog.admin.settings.default_article_image_label'),
+              label: app.translator.trans('vadkuz-flarum2-blog.admin.settings.default_article_image_label'),
             },
             [
-              <div className="helpText">{app.translator.trans('v17development-flarum-blog.admin.settings.default_article_image_text')}</div>,
+              <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.default_article_image_text')}</div>,
               UploadImageButton.component({
                 name: 'blog_default_image',
               }),

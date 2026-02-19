@@ -19,7 +19,7 @@ export default class RenameArticleModal extends Modal {
   }
 
   title() {
-    return app.translator.trans('v17development-flarum-blog.forum.tools.rename_article');
+    return app.translator.trans('vadkuz-flarum2-blog.forum.tools.rename_article');
   }
 
   content() {
@@ -36,8 +36,8 @@ export default class RenameArticleModal extends Modal {
     items.add(
       'name',
       <div className="Form-group">
-        <label>{app.translator.trans('v17development-flarum-blog.forum.article.title')}:</label>
-        <input className="FormControl" placeholder={app.translator.trans('v17development-flarum-blog.forum.article.title')} bidi={this.name} />
+        <label>{app.translator.trans('vadkuz-flarum2-blog.forum.article.title')}:</label>
+        <input className="FormControl" placeholder={app.translator.trans('vadkuz-flarum2-blog.forum.article.title')} bidi={this.name} />
       </div>,
       50
     );

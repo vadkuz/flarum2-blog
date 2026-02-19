@@ -18,7 +18,7 @@ export default class BlogItem extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
-    app.setTitle(app.translator.trans('v17development-flarum-blog.forum.blog'));
+    app.setTitle(app.translator.trans('vadkuz-flarum2-blog.forum.blog'));
 
     // Send history push
     app.history.push('blogArticle');
@@ -62,7 +62,7 @@ export default class BlogItem extends Page {
     this.article = article;
 
     // Update title
-    app.setTitle(`${article.title()} - ${app.translator.trans('v17development-flarum-blog.forum.blog')}`);
+    app.setTitle(`${article.title()} - ${app.translator.trans('vadkuz-flarum2-blog.forum.blog')}`);
 
     this.loading = false;
 
@@ -118,7 +118,7 @@ export default class BlogItem extends Page {
         })}
       >
         {this?.article?.title?.() || 'Ghost title'}
-        {this.article?.isHidden?.() && `(${app.translator.trans('v17development-flarum-blog.forum.hidden')})`}
+        {this.article?.isHidden?.() && `(${app.translator.trans('vadkuz-flarum2-blog.forum.hidden')})`}
       </h1>,
       100
     );
@@ -158,7 +158,7 @@ export default class BlogItem extends Page {
             <blockquote class="uncited" style={{ fontSize: '16px' }}>
               <div>
                 {icon('far fa-clock', { style: { marginRight: '5px' } })}{' '}
-                {app.translator.trans('v17development-flarum-blog.forum.review_article.pending_review')}
+                {app.translator.trans('vadkuz-flarum2-blog.forum.review_article.pending_review')}
               </div>
             </blockquote>
           </div>,
@@ -231,7 +231,7 @@ export default class BlogItem extends Page {
             (!this.article.isLocked || (this.article.isLocked && !this.article.isLocked())) && <ArticleSubscription discussion={this.article} />}
 
           <h4>
-            {app.translator.trans('v17development-flarum-blog.forum.comment_section.comments')} ({this.article ? this.article.commentCount() - 1 : 0})
+            {app.translator.trans('vadkuz-flarum2-blog.forum.comment_section.comments')} ({this.article ? this.article.commentCount() - 1 : 0})
           </h4>
 
           {/* Locked */}
@@ -240,7 +240,7 @@ export default class BlogItem extends Page {
               <blockquote class="uncited">
                 <div>
                   <span className={'far fa-lock'} style={{ marginRight: '5px' }} />{' '}
-                  {app.translator.trans('v17development-flarum-blog.forum.comment_section.locked')}
+                  {app.translator.trans('vadkuz-flarum2-blog.forum.comment_section.locked')}
                 </div>
               </blockquote>
             </div>
@@ -278,7 +278,7 @@ export default class BlogItem extends Page {
               }}
             >
               <i class="icon fas fa-angle-left Button-icon"></i>
-              <span class="Button-label">{app.translator.trans('v17development-flarum-blog.forum.return_to_overview')}</span>
+              <span class="Button-label">{app.translator.trans('vadkuz-flarum2-blog.forum.return_to_overview')}</span>
             </Link>
           </div>
           <div className={'FlarumBlog-Article'}>

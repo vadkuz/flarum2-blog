@@ -11,7 +11,7 @@ export default class BlogCategories extends Component {
   view() {
     return (
       <div className="BlogCategories BlogSideWidget">
-        <h3>{app.translator.trans('v17development-flarum-blog.forum.categories')}</h3>
+        <h3>{app.translator.trans('vadkuz-flarum2-blog.forum.categories')}</h3>
 
         {this.blogCategories &&
           this.blogCategories.map((tagId) => {

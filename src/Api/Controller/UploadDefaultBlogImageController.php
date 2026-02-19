@@ -1,5 +1,5 @@
 <?php
-namespace V17Development\FlarumBlog\Api\Controller;
+namespace Vadkuz\Flarum2Blog\Api\Controller;
 
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Support\Str;

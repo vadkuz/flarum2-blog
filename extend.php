@@ -1,6 +1,6 @@
 <?php
 
-namespace V17Development\FlarumBlog;
+namespace Vadkuz\Flarum2Blog;
 
 // Flarum classes
 use Flarum\Api\Controller as FlarumController;
@@ -14,34 +14,34 @@ use Flarum\Discussion\Search\DiscussionSearcher;
 use Flarum\Tags\Api\Serializer\TagSerializer;
 
 // Controllers
-use V17Development\FlarumBlog\Controller\BlogOverviewController;
-use V17Development\FlarumBlog\Controller\BlogItemController;
-use V17Development\FlarumBlog\Controller\BlogComposerController;
+use Vadkuz\Flarum2Blog\Controller\BlogOverviewController;
+use Vadkuz\Flarum2Blog\Controller\BlogItemController;
+use Vadkuz\Flarum2Blog\Controller\BlogComposerController;
 
 // Access
-use V17Development\FlarumBlog\Access\ScopeDiscussionVisibility;
+use Vadkuz\Flarum2Blog\Access\ScopeDiscussionVisibility;
 // API controllers
-use V17Development\FlarumBlog\Api\AttachForumSerializerAttributes;
-use V17Development\FlarumBlog\Api\AttachTagSerializerAttributes;
-use V17Development\FlarumBlog\Api\Controller\CreateBlogMetaController;
-use V17Development\FlarumBlog\Api\Controller\UpdateBlogMetaController;
-use V17Development\FlarumBlog\Api\Controller\UploadDefaultBlogImageController;
-use V17Development\FlarumBlog\Api\Controller\DeleteDefaultBlogImageController;
-use V17Development\FlarumBlog\Api\Serializer\BlogMetaSerializer;
+use Vadkuz\Flarum2Blog\Api\AttachForumSerializerAttributes;
+use Vadkuz\Flarum2Blog\Api\AttachTagSerializerAttributes;
+use Vadkuz\Flarum2Blog\Api\Controller\CreateBlogMetaController;
+use Vadkuz\Flarum2Blog\Api\Controller\UpdateBlogMetaController;
+use Vadkuz\Flarum2Blog\Api\Controller\UploadDefaultBlogImageController;
+use Vadkuz\Flarum2Blog\Api\Controller\DeleteDefaultBlogImageController;
+use Vadkuz\Flarum2Blog\Api\Serializer\BlogMetaSerializer;
 // Listeners
-use V17Development\FlarumBlog\Listeners\CreateBlogMetaOnDiscussionCreate;
+use Vadkuz\Flarum2Blog\Listeners\CreateBlogMetaOnDiscussionCreate;
 
 // Models
-use V17Development\FlarumBlog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
 
 // Filters
-use V17Development\FlarumBlog\Query\FilterDiscussionsForBlogPosts;
-use V17Development\FlarumBlog\Query\BlogArticleFilterGambit;
+use Vadkuz\Flarum2Blog\Query\FilterDiscussionsForBlogPosts;
+use Vadkuz\Flarum2Blog\Query\BlogArticleFilterGambit;
 
 // SEO
-use V17Development\FlarumBlog\SeoPage\SeoBlogOverviewMeta;
-use V17Development\FlarumBlog\SeoPage\SeoBlogArticleMeta;
-use V17Development\FlarumBlog\Subscribers\SeoBlogSubscriber;
+use Vadkuz\Flarum2Blog\SeoPage\SeoBlogOverviewMeta;
+use Vadkuz\Flarum2Blog\SeoPage\SeoBlogArticleMeta;
+use Vadkuz\Flarum2Blog\Subscribers\SeoBlogSubscriber;
 
 $extend = [
     (new Extend\Frontend('forum'))

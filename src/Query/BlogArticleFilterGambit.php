@@ -1,12 +1,12 @@
 <?php
 
-namespace V17Development\FlarumBlog\Query;
+namespace Vadkuz\Flarum2Blog\Query;
 
 use Flarum\Search\AbstractRegexGambit;
 use Flarum\Search\SearchState;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Database\Query\Builder;
-use V17Development\FlarumBlog\Util\BlogTags;
+use Vadkuz\Flarum2Blog\Util\BlogTags;
 
 class BlogArticleFilterGambit extends AbstractRegexGambit
 {

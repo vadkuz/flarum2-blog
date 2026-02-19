@@ -13,7 +13,7 @@ export default class BlogOverview extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
-    app.setTitle(app.translator.trans('v17development-flarum-blog.forum.blog'));
+    app.setTitle(app.translator.trans('vadkuz-flarum2-blog.forum.blog'));
 
     this.bodyClass = 'BlogOverviewPage';
 
@@ -116,7 +116,7 @@ export default class BlogOverview extends Page {
 
   title() {
     if (!m.route.param('slug')) {
-      return <h2>{app.translator.trans('v17development-flarum-blog.forum.recent_posts')}</h2>;
+      return <h2>{app.translator.trans('vadkuz-flarum2-blog.forum.recent_posts')}</h2>;
     }
 
     const tag = app.store.all('tags').filter((tag) => tag.slug() === m.route.param('slug'));
@@ -126,7 +126,7 @@ export default class BlogOverview extends Page {
         {tag && tag[0] && tag[0].name()}
         <small>
           {' '}
-          - <Link href={app.route('blog')}>{app.translator.trans('v17development-flarum-blog.forum.return_to_overview')}</Link>
+          - <Link href={app.route('blog')}>{app.translator.trans('vadkuz-flarum2-blog.forum.return_to_overview')}</Link>
         </small>
       </h2>
     );
@@ -151,7 +151,7 @@ export default class BlogOverview extends Page {
             <div className={'BlogOverviewButtons'}>
               {app.forum.attribute('canWriteBlogPosts') && (
                 <Button className={'Button'} onclick={() => this.newArticle()} icon={'fas fa-pencil-alt'}>
-                  {app.translator.trans('v17development-flarum-blog.forum.compose.write_article')}
+                  {app.translator.trans('vadkuz-flarum2-blog.forum.compose.write_article')}
                 </Button>
               )}
 
@@ -226,11 +226,11 @@ export default class BlogOverview extends Page {
                 this.posts.map((article) => <BlogOverviewItem article={article} defaultImage={defaultImage} />)}
 
               {!this.isLoading && this.featuredPosts.length > 0 && this.hasMore === null && (
-                <p className={'FlarumBlog-reached-end'}>{app.translator.trans('v17development-flarum-blog.forum.no_more_posts')}</p>
+                <p className={'FlarumBlog-reached-end'}>{app.translator.trans('vadkuz-flarum2-blog.forum.no_more_posts')}</p>
               )}
 
               {!this.isLoading && this.featuredPosts.length === 0 && this.posts.length === 0 && (
-                <p className={'FlarumBlog-reached-end'}>{app.translator.trans('v17development-flarum-blog.forum.category_empty')}</p>
+                <p className={'FlarumBlog-reached-end'}>{app.translator.trans('vadkuz-flarum2-blog.forum.category_empty')}</p>
               )}
 
               {!this.isLoading && this.hasMore !== null && (

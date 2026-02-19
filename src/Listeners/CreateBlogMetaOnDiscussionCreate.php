@@ -1,15 +1,15 @@
 <?php
 
-namespace V17Development\FlarumBlog\Listeners;
+namespace Vadkuz\Flarum2Blog\Listeners;
 
 use Flarum\Settings\SettingsRepositoryInterface;
 use Illuminate\Contracts\Events\Dispatcher;
 use Flarum\User\Exception\PermissionDeniedException;
 use Flarum\Discussion\Event\Saving;
 use Flarum\Foundation\DispatchEventsTrait;
-use V17Development\FlarumBlog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
 use Illuminate\Support\Arr;
-use V17Development\FlarumBlog\Util\BlogTags;
+use Vadkuz\Flarum2Blog\Util\BlogTags;
 
 class CreateBlogMetaOnDiscussionCreate
 {

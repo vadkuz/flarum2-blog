@@ -14,7 +14,7 @@ export default class BlogComposer extends Page {
   oninit(vnode) {
     super.oninit(vnode);
 
-    app.setTitle(app.translator.trans('v17development-flarum-blog.forum.blog'));
+    app.setTitle(app.translator.trans('vadkuz-flarum2-blog.forum.blog'));
 
     // User cannot write blogs
     if (!app.forum.attribute('canWriteBlogPosts')) {
@@ -117,7 +117,7 @@ export default class BlogComposer extends Page {
       <div className="FlarumBlog-ToolButtons">
         <Link href={app.route('blog')} className="Button" loading={this.isSaving} icon="fas fa-angle-left">
           <i class="icon fas fa-angle-left Button-icon" />
-          <span class="Button-label">{app.translator.trans('v17development-flarum-blog.forum.return_to_overview')}</span>
+          <span class="Button-label">{app.translator.trans('vadkuz-flarum2-blog.forum.return_to_overview')}</span>
         </Link>
       </div>,
       100
@@ -185,7 +185,7 @@ export default class BlogComposer extends Page {
             )}
 
             <Button className={'Button'} onclick={(e) => this.openBlogSettings(e)} icon={'fas fa-pencil-alt'} loading={this.isSaving}>
-              {app.translator.trans('v17development-flarum-blog.forum.composer.update_settings')}
+              {app.translator.trans('vadkuz-flarum2-blog.forum.composer.update_settings')}
             </Button>
           </div>
         </div>
@@ -200,8 +200,8 @@ export default class BlogComposer extends Page {
 
           <button class="Button Button--text" onclick={(e) => this.openTagsModal(e)}>
             {this.tags.length === 0
-              ? app.translator.trans('v17development-flarum-blog.forum.composer.select_category')
-              : app.translator.trans('v17development-flarum-blog.forum.composer.edit_categories')}{' '}
+              ? app.translator.trans('vadkuz-flarum2-blog.forum.composer.select_category')
+              : app.translator.trans('vadkuz-flarum2-blog.forum.composer.edit_categories')}{' '}
             <i className={'fas fa-edit'} />
           </button>
         </div>
@@ -211,7 +211,7 @@ export default class BlogComposer extends Page {
           <h1 onclick={() => this.openNameArticleModal()} className="FlarumBlog-Article-Title" style={{ cursor: 'pointer' }}>
             {this.article && this.article.title() && this.article.title() !== ''
               ? this.article.title()
-              : app.translator.trans('v17development-flarum-blog.forum.composer.no_title')}
+              : app.translator.trans('vadkuz-flarum2-blog.forum.composer.no_title')}
 
             <button class="Button Button--text" onclick={(e) => e.preventDefault()}>
               <i className={'fas fa-edit'} />
@@ -222,8 +222,8 @@ export default class BlogComposer extends Page {
             <Composer
               composer={app.composer}
               originalContent={''}
-              submitLabel={app.translator.trans('v17development-flarum-blog.forum.composer.post_article')}
-              placeholder={app.translator.trans('v17development-flarum-blog.forum.composer.enter_message_here')}
+              submitLabel={app.translator.trans('vadkuz-flarum2-blog.forum.composer.post_article')}
+              placeholder={app.translator.trans('vadkuz-flarum2-blog.forum.composer.enter_message_here')}
               onsubmit={() => this.create()}
               disabled={this.isSaving}
             />
@@ -236,14 +236,14 @@ export default class BlogComposer extends Page {
     items.add(
       'commentsPlaceholder',
       <div className="FlarumBlog-Article-Comments">
-        <h4>{app.translator.trans('v17development-flarum-blog.forum.comment_section.comments')} (0)</h4>
+        <h4>{app.translator.trans('vadkuz-flarum2-blog.forum.comment_section.comments')} (0)</h4>
         {/* Locked */}
 
         <div className="Post-body">
           <blockquote class="uncited">
             <div>
               <span className="fas fa-ban" style={{ marginRight: '5px' }} />{' '}
-              {app.translator.trans('v17development-flarum-blog.forum.composer.comment_section')}
+              {app.translator.trans('vadkuz-flarum2-blog.forum.composer.comment_section')}
             </div>
           </blockquote>
         </div>
@@ -276,13 +276,13 @@ export default class BlogComposer extends Page {
 
     // No blog tags selected
     if (findblogTags.length === 0) {
-      alert(app.translator.trans('v17development-flarum-blog.forum.composer.no_blog_tags_selected'));
+      alert(app.translator.trans('vadkuz-flarum2-blog.forum.composer.no_blog_tags_selected'));
       return;
     }
 
     if (
       (this.blogMeta === null || (!this.blogMeta.featuredImage() && !app.forum.attribute('blogDefaultImage')) || !this.blogMeta.summary()) &&
-      !confirm(app.translator.trans('v17development-flarum-blog.forum.composer.post_without_blog_info'))
+      !confirm(app.translator.trans('vadkuz-flarum2-blog.forum.composer.post_without_blog_info'))
     ) {
       return;
     }

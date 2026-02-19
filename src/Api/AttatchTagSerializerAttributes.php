@@ -1,9 +1,9 @@
 <?php
 
-namespace V17Development\FlarumBlog\Api;
+namespace Vadkuz\Flarum2Blog\Api;
 
 use Flarum\Tags\Api\Serializer\TagSerializer;
-use V17Development\FlarumBlog\Util\BlogTags;
+use Vadkuz\Flarum2Blog\Util\BlogTags;
 
 class AttatchTagSerializerAttributes
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace V17Development\FlarumBlog\Event;
+namespace Vadkuz\Flarum2Blog\Event;
 
-use V17Development\FlarumBlog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
 
 class BlogMetaCreated
 {
