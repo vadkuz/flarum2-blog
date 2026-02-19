@@ -9,6 +9,7 @@ import extendTagOverview from './utils/extendTagOverview';
 import discussionRouting from './utils/discussionRouting';
 import BlogComposer from './pages/BlogComposer';
 import addSidebarNav from './utils/addSidebarNav';
+import applyRuTranslations from '../common/translations/ru';
 
 import BlogItem from './pages/BlogItem';
 
@@ -16,6 +17,8 @@ import BlogItem from './pages/BlogItem';
 app.initializers.add(
   'vadkuz-flarum2-blog',
   (app) => {
+    applyRuTranslations(app);
+
     app.routes.blog = { path: '/blog', component: BlogOverview };
 
     app.routes.blogCategory = {

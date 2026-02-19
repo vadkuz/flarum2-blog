@@ -1,0 +1,132 @@
+vadkuz-flarum2-blog:
+  admin:
+    blog: Блог
+
+    select_categories_modal:
+      title: "Выбор категорий блога"
+      description: "Выберите один или несколько тегов, которые считаются категориями блога."
+      visit_blog: "Перейти в блог."
+      tag_name: "Название тега"
+      no_tags: "У вас пока нет тегов."
+      save_changes: "Сохранить изменения"
+      close: "Закрыть"
+
+    permissions:
+      write_articles: "Писать и редактировать статьи блога"
+      auto_approve_posts: "Публиковать статьи без одобрения"
+      approve_posts: "Может одобрять статьи блога"
+
+    settings:
+      no_categories_selected: "Категории не выбраны"
+      selected_category_count: "{count, plural, one {Выбрана # категория} few {Выбрано # категории} many {Выбрано # категорий} other {Выбрано # категории}}"
+      select_categories_button: "Выбрать категории блога"
+      blog_heading: Блог
+      featured_count_label: "Макс. число избранных постов"
+      featured_count_text: "Сколько постов должно отображаться в большой сетке вверху страницы блога?"
+      allow_comments_label: "Разрешить комментарии"
+      allow_comments_text: "По умолчанию разрешены комментарии к записям блога. При отключении их можно включать отдельно для каждой записи. Примечание: изменение этой настройки не влияет на уже существующие записи блога."
+      require_review_label: "Записи блога требуют модерации"
+      require_review_text: "При публикации статья не будет видна сразу и должна быть одобрена модератором."
+      hide_on_discussion_list_label: "Не показывать в списке обсуждений"
+      hide_on_discussion_list_text: "Скрывать записи блога из списка обсуждений."
+      add_sidebar_nav_label: "Добавить в боковую навигацию"
+      add_sidebar_nav_text: "Добавить ссылку на блог в боковое меню навигации."
+      categories_heading: Категории
+      hide_tags_in_taglist_label: "Скрыть теги в списке тегов"
+      hide_tags_in_taglist_text: "Если включено, это расширение скроет теги блога с главной страницы."
+      show_tag_hierarchy_label: "Показывать иерархию тегов"
+      show_tag_hierarchy_text: "Добавляет отступы дочерним категориям и делает список категорий иерархическим."
+      redirects_heading: "Переадресации"
+      redirect_articles_label: "Переадресовывать статьи блога"
+      redirect_articles_text: "Если включено, расширение будет перенаправлять исходные URL обсуждений на URL статьи в блоге."
+      redirect_tags_label: "Переадресовывать теги блога"
+      redirect_tags_text: "Если включено, расширение перенаправляет URL тегов блога на URL категории блога."
+      default_article_image_label: "Изображение статьи по умолчанию"
+      default_article_image_text: "Выберите изображение по умолчанию, которое будет показываться, если у статьи нет собственного изображения."
+      add_hero_label: "Показывать приветственный баннер"
+      add_hero_text: "Показывать приветственный баннер на страницах блога, пока пользователь его не закрыл."
+
+  forum:
+    blog: Блог
+    read_more: "Читать далее"
+    hidden: "Скрыто"
+    recent_posts: "Последние записи блога"
+    categories: Категории
+    forum_nav: "Навигация форума"
+    return_to_overview: "Вернуться к обзору блога"
+    no_more_posts: "Больше нет записей в блоге."
+    category_empty: "В этой категории нет записей блога."
+
+    compose:
+      write_article: "Написать статью"
+
+    validation:
+      missing_id: "Отсутствует ID"
+
+    article:
+      title: "Заголовок"
+      slug: "Слаг"
+      summary: "Краткое описание"
+
+    comment_section:
+      comments: "Комментарии"
+      locked: "Раздел комментариев отключен для этой статьи"
+
+    review_article:
+      pending_review_title: "На модерации"
+      pending_review: "Эта статья ожидает проверки и еще не опубликована"
+      approve_article: "Одобрить статью"
+      approve_article_approved: "Статья одобрена и опубликована"
+
+    tools:
+      manage: "Управление"
+      rename_article: "Переименовать статью"
+      edit_article: "Редактировать статью"
+      update_category: "Обновить категории"
+      article_settings: "Настройки статьи"
+      approve_article: "Одобрить статью"
+      hide_article: "Скрыть статью"
+      recover_article: "Восстановить статью"
+      delete_forever: "Удалить навсегда"
+      enable_comments: "Включить комментарии"
+      disable_comments: "Отключить комментарии"
+
+    utils:
+      redirect:
+        title: "Перенаправляем вас на статью блога..."
+        link: "<a>Нажмите здесь</a>, если перенаправление не произошло"
+
+    composer:
+      no_title: "Без заголовка"
+      enter_message_here: "Введите сообщение"
+      post_article: "Опубликовать статью"
+      select_category: "Выбрать категорию"
+      edit_categories: "Изменить категории"
+      update_settings: "Обновить настройки блога"
+      write: "Написать"
+      view: "Предпросмотр"
+      nothing_to_preview: "Нечего показывать в предпросмотре"
+      comment_section: "Раздел комментариев недоступен при написании статьи."
+      no_blog_tags_selected: "Среди выбранных тегов нет блог-тега. Пожалуйста, выберите хотя бы один."
+      post_without_blog_info: "Вы уверены, что хотите опубликовать эту статью? Вы еще не указали краткое описание или изображение."
+
+    article_settings:
+      title: "Настройки статьи блога"
+
+      fields:
+        summary:
+          title: "Краткое описание статьи"
+          placeholder: "Введите краткое описание"
+          helper_text: "Это описание отображается на странице обзора блога и используется для SEO."
+
+        image:
+          title: "Изображение статьи"
+          helper_text: "Лучшее разрешение для соцсетей: 1200x630"
+
+        highlight:
+          title: "Выделенная статья"
+          helper_text: "Показывать эту статью с большим изображением на странице обзора блога."
+
+    placeholders:
+      ghost_title: "Черновой заголовок"
+      ghost_category: "Категория"

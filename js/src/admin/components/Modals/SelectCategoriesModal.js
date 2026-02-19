@@ -16,7 +16,7 @@ export default class SelectCategoriesModal extends FormModal {
   }
 
   title() {
-    return 'Select blog categories';
+    return app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.title');
   }
 
   className() {
@@ -28,9 +28,9 @@ export default class SelectCategoriesModal extends FormModal {
       <div>
         <div className="Modal-body">
           <p>
-            Please select one or more tags that are considered blog tags.{' '}
+            {app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.description')}{' '}
             <a href={app.forum.attribute('baseUrl') + '/blog'} target={'_blank'}>
-              Visit your blog.
+              {app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.visit_blog')}
             </a>
           </p>
 
@@ -38,14 +38,14 @@ export default class SelectCategoriesModal extends FormModal {
             <thead>
               <tr>
                 <th width="35"></th>
-                <th>Tag name</th>
+                <th>{app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.tag_name')}</th>
                 <th width="50"></th>
               </tr>
             </thead>
             <tbody>
               {app.store.all('tags').length === 0 && (
                 <tr>
-                  <td colSpan="3">You currently have no tags.</td>
+                  <td colSpan="3">{app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.no_tags')}</td>
                 </tr>
               )}
 
@@ -86,7 +86,9 @@ export default class SelectCategoriesModal extends FormModal {
         </div>
         <div style="padding: 25px 30px; text-align: center;">
           <Button type="submit" className="Button Button--primary" loading={this.loading} disabled={this.loading}>
-            {this.hasChanges ? 'Save changes' : 'Close'}
+            {this.hasChanges
+              ? app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.save_changes')
+              : app.translator.trans('vadkuz-flarum2-blog.admin.select_categories_modal.close')}
           </Button>
         </div>
       </div>

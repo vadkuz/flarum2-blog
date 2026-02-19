@@ -3,8 +3,11 @@ import app from 'flarum/admin/app';
 import BasicsPage from 'flarum/admin/components/BasicsPage';
 import PermissionGrid from 'flarum/admin/components/PermissionGrid';
 import BlogSettings from './pages/BlogSettings';
+import applyRuTranslations from '../common/translations/ru';
 
 app.initializers.add('vadkuz-flarum2-blog', () => {
+  applyRuTranslations(app);
+
   // Register extension settings page
   app.registry.for('vadkuz-flarum2-blog').registerPage(BlogSettings);
 

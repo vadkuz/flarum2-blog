@@ -126,7 +126,7 @@ export default class BlogItem extends Page {
           'FlarumBlog-Article-GhostTitle': this.loading,
         })}
       >
-        {this?.article?.title?.() || 'Ghost title'}
+        {this?.article?.title?.() || app.translator.trans('vadkuz-flarum2-blog.forum.placeholders.ghost_title')}
         {this.article?.isHidden?.() && `(${app.translator.trans('vadkuz-flarum2-blog.forum.hidden')})`}
       </h1>,
       100
@@ -214,7 +214,12 @@ export default class BlogItem extends Page {
       <div className="FlarumBlog-Article-Categories">
         {!this.loading && this.article?.tags?.()?.map((tag) => <Link href={app.route('blogCategory', { slug: tag.slug() })}>{tag.name()}</Link>)}
 
-        {this.loading && [0, 1].map(() => <span className="FlarumBlog-Article-GhostCategory">Category</span>)}
+        {this.loading &&
+          [0, 1].map(() => (
+            <span className="FlarumBlog-Article-GhostCategory">
+              {app.translator.trans('vadkuz-flarum2-blog.forum.placeholders.ghost_category')}
+            </span>
+          ))}
       </div>,
       60
     );

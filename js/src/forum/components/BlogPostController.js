@@ -267,7 +267,7 @@ export default class BlogPostController extends Component {
           {Dropdown.component(
             {
               icon: 'fas fa-cog',
-              label: 'Manage',
+              label: app.translator.trans('vadkuz-flarum2-blog.forum.tools.manage'),
               buttonClassName: 'Button',
               menuClassName: 'Dropdown-menu--right',
               onshow: () => {

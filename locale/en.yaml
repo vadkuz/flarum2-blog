@@ -2,6 +2,15 @@ vadkuz-flarum2-blog:
   admin:
     blog: "Blog"
 
+    select_categories_modal:
+      title: "Select blog categories"
+      description: "Please select one or more tags that are considered blog tags."
+      visit_blog: "Visit your blog."
+      tag_name: "Tag name"
+      no_tags: "You currently have no tags."
+      save_changes: "Save changes"
+      close: "Close"
+
     permissions:
       write_articles: "Write and edit blog articles"
       auto_approve_posts: "Post articles without approval"
@@ -70,6 +79,7 @@ vadkuz-flarum2-blog:
       approve_article_approved: "The article has been approved and published"
 
     tools:
+      manage: "Manage"
       rename_article: "Rename article"
       edit_article: "Edit article"
       update_category: "Update categories"
@@ -116,3 +126,7 @@ vadkuz-flarum2-blog:
         highlight:
           title: Highlighted post
           helper_text: Give this post a big image on the blog overview page.
+
+    placeholders:
+      ghost_title: "Ghost title"
+      ghost_category: "Category"
