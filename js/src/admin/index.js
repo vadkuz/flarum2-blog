@@ -1,13 +1,14 @@
 import { extend } from 'flarum/common/extend';
+import app from 'flarum/admin/app';
 import BasicsPage from 'flarum/admin/components/BasicsPage';
 import PermissionGrid from 'flarum/admin/components/PermissionGrid';
 import BlogSettings from './pages/BlogSettings';
 
 app.initializers.add('vadkuz-flarum2-blog', () => {
   // Register extension settings page
-  app.extensionData.for('vadkuz-flarum2-blog').registerPage(BlogSettings);
+  app.registry.for('vadkuz-flarum2-blog').registerPage(BlogSettings);
 
-  app.extensionData
+  app.registry
     .for('vadkuz-flarum2-blog')
     .registerPermission(
       {
@@ -41,8 +42,8 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
   extend(PermissionGrid.prototype, 'permissionItems', function (items) {
     const extensionId = this.attrs?.extensionId;
     const permissions = extensionId
-      ? app.extensionData.getExtensionPermissions(extensionId, 'blog')?.toArray?.() ?? []
-      : app.extensionData.getAllExtensionPermissions('blog').toArray();
+      ? app.registry.getExtensionPermissions(extensionId, 'blog')?.toArray?.() ?? []
+      : app.registry.getAllPermissions('blog').toArray();
 
     // Add blog permissions
     items.add(

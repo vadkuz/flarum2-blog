@@ -6,8 +6,8 @@ import Alert from 'flarum/common/components/Alert';
 import Button from 'flarum/common/components/Button';
 import FieldSet from 'flarum/common/components/FieldSet';
 import Switch from 'flarum/common/components/Switch';
+import UploadImageButton from 'flarum/common/components/UploadImageButton';
 import SelectCategoriesModal from '../components/Modals/SelectCategoriesModal';
-import UploadImageButton from 'flarum/admin/components/UploadImageButton';
 
 export default class BlogSettings extends ExtensionPage {
   oninit(attrs) {
@@ -28,7 +28,8 @@ export default class BlogSettings extends ExtensionPage {
     this.featuredCount = app.data.settings.blog_featured_count ?? 3;
     this.blogAddHero = app.data.settings.blog_add_hero ?? true;
 
-    app.forum.data.attributes.blog_default_imageUrl = `${app.forum.attribute('baseUrl')}/assets/${app.data.settings.blog_default_image_path}`;
+    const defaultImagePath = app.data.settings.blog_default_image_path ?? null;
+    app.forum.data.attributes.blog_default_imageUrl = defaultImagePath ? `${app.forum.attribute('baseUrl')}/assets/${defaultImagePath}` : null;
   }
 
   content() {
@@ -239,6 +240,9 @@ export default class BlogSettings extends ExtensionPage {
               <div className="helpText">{app.translator.trans('vadkuz-flarum2-blog.admin.settings.default_article_image_text')}</div>,
               UploadImageButton.component({
                 name: 'blog_default_image',
+                routePath: 'blog_default_image',
+                value: () => app.data.settings.blog_default_image_path ?? null,
+                url: () => app.forum.attribute('blog_default_imageUrl') ?? null,
               }),
             ]
           )}
