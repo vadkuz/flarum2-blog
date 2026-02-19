@@ -102,7 +102,7 @@ export default class BlogPostSettingsModal extends Modal {
 
     items.add(
       'image',
-      <div className="Form-group V17Blog-ArticleImage">
+      <div className="Form-group VadkuzBlog-ArticleImage">
         <label>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.title')}:</label>
         <div data-upload-enabled={!!fofUploadButton}>
           <input type="text" className="FormControl" bidi={this.featuredImage} placeholder="https://" />
