@@ -4,7 +4,9 @@ namespace Vadkuz\Flarum2Blog;
 
 // Flarum classes
 use Flarum\Extend;
-use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Api\Context;
+use Flarum\Api\Resource\ForumResource;
+use Flarum\Api\Schema;
 use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
 
@@ -16,7 +18,6 @@ use Vadkuz\Flarum2Blog\Controller\BlogComposerController;
 // Access
 use Vadkuz\Flarum2Blog\Access\ScopeDiscussionVisibility;
 // API controllers
-use Vadkuz\Flarum2Blog\Api\AttachForumSerializerAttributes;
 use Vadkuz\Flarum2Blog\Api\Controller\CreateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UpdateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UploadDefaultBlogImageController;
@@ -26,6 +27,7 @@ use Vadkuz\Flarum2Blog\Listeners\CreateBlogMetaOnDiscussionCreate;
 
 // Models
 use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
+use Vadkuz\Flarum2Blog\Util\BlogTags;
 
 // SEO
 use Vadkuz\Flarum2Blog\SeoPage\SeoBlogOverviewMeta;
@@ -62,8 +64,24 @@ $extend = [
     (new Extend\ModelVisibility(Discussion::class))
         ->scope(ScopeDiscussionVisibility::class),
 
-    (new Extend\ApiSerializer(ForumSerializer::class))
-        ->attributes(AttachForumSerializerAttributes::class),
+    (new Extend\Settings())
+        ->serializeToForum('blogTags', 'blog_tags', fn (?string $value) => BlogTags::parseTagIds($value ?? ''))
+        ->serializeToForum('blogRedirectsEnabled', 'blog_redirects_enabled', fn (?string $value) => $value ?: 'both')
+        ->serializeToForum('blogCommentsEnabled', 'blog_allow_comments', fn ($value) => filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true)
+        ->serializeToForum('blogHideTags', 'blog_hide_tags', fn ($value) => filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true)
+        ->serializeToForum('blogDefaultImage', 'blog_default_image_path')
+        ->serializeToForum('blogCategoryHierarchy', 'blog_category_hierarchy', fn ($value) => filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true)
+        ->serializeToForum('blogAddSidebarNav', 'blog_add_sidebar_nav', fn ($value) => filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true)
+        ->serializeToForum('blogFeaturedCount', 'blog_featured_count', fn ($value) => is_numeric($value) ? (int) $value : 3)
+        ->serializeToForum('blogAddHero', 'blog_add_hero', fn ($value) => filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true),
+
+    (new Extend\ApiResource(ForumResource::class))
+        ->fields(fn () => [
+            Schema\Boolean::make('canWriteBlogPosts')
+                ->get(fn (object $model, Context $context) => $context->getActor()->can('blog.writeArticles')),
+            Schema\Boolean::make('canApproveBlogPosts')
+                ->get(fn (object $model, Context $context) => $context->getActor()->can('blog.canApprovePosts')),
+        ]),
 ];
 
 // Define events
