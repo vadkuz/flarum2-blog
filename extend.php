@@ -4,6 +4,7 @@ namespace Vadkuz\Flarum2Blog;
 
 // Flarum classes
 use Flarum\Extend;
+use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
 
@@ -15,6 +16,7 @@ use Vadkuz\Flarum2Blog\Controller\BlogComposerController;
 // Access
 use Vadkuz\Flarum2Blog\Access\ScopeDiscussionVisibility;
 // API controllers
+use Vadkuz\Flarum2Blog\Api\AttachForumSerializerAttributes;
 use Vadkuz\Flarum2Blog\Api\Controller\CreateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UpdateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UploadDefaultBlogImageController;
@@ -59,6 +61,9 @@ $extend = [
 
     (new Extend\ModelVisibility(Discussion::class))
         ->scope(ScopeDiscussionVisibility::class),
+
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->attributes(AttachForumSerializerAttributes::class),
 ];
 
 // Define events
