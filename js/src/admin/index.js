@@ -3,12 +3,12 @@ import BasicsPage from 'flarum/admin/components/BasicsPage';
 import PermissionGrid from 'flarum/admin/components/PermissionGrid';
 import BlogSettings from './pages/BlogSettings';
 
-app.initializers.add('v17development-flarum-blog', () => {
+app.initializers.add('vadkuz-flarum2-blog', () => {
   // Register extension settings page
-  app.extensionData.for('v17development-blog').registerPage(BlogSettings);
+  app.extensionData.for('vadkuz-flarum2-blog').registerPage(BlogSettings);
 
   app.extensionData
-    .for('v17development-blog')
+    .for('vadkuz-flarum2-blog')
     .registerPermission(
       {
         icon: 'fas fa-pencil-alt',

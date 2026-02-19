@@ -14,7 +14,7 @@ import BlogItem from './pages/BlogItem';
 
 // Register Flarum Blog
 app.initializers.add(
-  'v17development-flarum-blog',
+  'vadkuz-flarum2-blog',
   (app) => {
     app.routes.blog = { path: '/blog', component: BlogOverview };
 

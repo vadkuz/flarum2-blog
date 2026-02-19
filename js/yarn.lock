@@ -1524,9 +1524,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@v17development/flarum-blog@workspace:.":
+"@vadkuz/flarum2-blog@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@v17development/flarum-blog@workspace:."
+  resolution: "@vadkuz/flarum2-blog@workspace:."
   dependencies:
     "@flarum/prettier-config": ^1.0.0
     flarum-tsconfig: ^2.0.0

@@ -1,20 +1,17 @@
 {
-  "name": "v17development/flarum-blog",
-  "description": "Adds a blog section to your forum",
+  "name": "vadkuz/flarum2-blog",
+  "description": "Blog extension for Flarum 2.x",
   "type": "flarum-extension",
   "license": "MIT",
   "authors": [
     {
-      "name": "V17 Development",
-      "email": "info@v17.dev"
+      "name": "Vadim Kuznetsov"
     }
   ],
-  "homepage": "https://v17.dev/projects/flarum-blog",
+  "homepage": "https://github.com/vadkuz/flarum2-blog",
   "support": {
-    "forum": "https://discuss.flarum.org/d/33038",
-    "issues": "https://github.com/v17development/flarum-blog/issues",
-    "source": "https://github.com/v17development/flarum-blog",
-    "docs": "https://community.v17.dev/knowledgebase/category/flarum-blog"
+    "issues": "https://github.com/vadkuz/flarum2-blog/issues",
+    "source": "https://github.com/vadkuz/flarum2-blog"
   },
   "autoload": {
     "psr-4": {
@@ -37,7 +34,7 @@
   },
   "extra": {
     "flarum-extension": {
-      "title": "Blog",
+      "title": "Flarum2 Blog",
       "category": "feature",
       "icon": {
         "name": "fas fa-blog",
@@ -50,9 +47,6 @@
         "askvortsov/flarum-rich-text",
         "v17development/flarum-seo"
       ]
-    },
-    "branch-alias": {
-      "dev-master": "0.6.x-dev"
     }
   },
   "require-dev": {}

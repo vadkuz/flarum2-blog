@@ -1,5 +1,5 @@
 {
-  "name": "@v17development/flarum-blog",
+  "name": "@vadkuz/flarum2-blog",
   "private": true,
   "prettier": "@flarum/prettier-config",
   "dependencies": {
