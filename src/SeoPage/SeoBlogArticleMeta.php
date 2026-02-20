@@ -74,8 +74,15 @@ class SeoBlogArticleMeta implements PageDriverInterface
         ServerRequestInterface $request,
         SeoProperties $properties
     ) {
-        // Get discussion ID from params
-        $discussionId = Arr::get($request->getQueryParams(), 'id');
+        // Route payload can be "{id}-{slug}", normalize to numeric discussion id.
+        $rawDiscussionId = Arr::get($request->getQueryParams(), 'id');
+        $discussionId = is_string($rawDiscussionId) ? (int) explode('-', $rawDiscussionId, 2)[0] : (int) $rawDiscussionId;
+
+        if ($discussionId < 1) {
+            $properties->setTitle($this->translator->trans('vadkuz-flarum2-blog.forum.blog'));
+
+            return;
+        }
 
         try {
             // Find discussion

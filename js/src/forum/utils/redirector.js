@@ -26,7 +26,11 @@ export default function () {
 
       // Tag is inside list
       if (isBlogTag(tag, blogTags)) {
-        m.route.set(app.route('blog'));
+        m.route.set(
+          app.route('blogCategory', {
+            slug: tag.slug(),
+          })
+        );
       }
     }
   });

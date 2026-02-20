@@ -10,31 +10,21 @@ use Illuminate\Support\Arr;
 
 class BlogItemController
 {
-    /**
-     * @var Client
-     */
-    protected $api;
-
-    /**
-    public function __construct(Client $api)
+    public function __construct(protected Client $api)
     {
-        $this->api = $api;
     }
 
-    public function __invoke(Document $document, ServerRequestInterface $request)
+    public function __invoke(Document $document, ServerRequestInterface $request): Document
     {
         $queryParams = $request->getQueryParams();
+        $rawId = Arr::get($queryParams, 'id');
+        $id = is_string($rawId) ? (int) explode('-', $rawId, 2)[0] : (int) $rawId;
 
-        // Find blog item
-        $apiDocument = $this->getApiDocument($request, (int) Arr::get($queryParams, 'id'));
-
-        // Article not found
-        if ($apiDocument === null) {
-            return $document;
+        if ($id < 1) {
+            throw new RouteNotFoundException();
         }
 
-        // Set payload
-        $document->payload['apiDocument'] = $apiDocument;
+        $document->payload['apiDocument'] = $this->getApiDocument($request, $id);
 
         return $document;
     }
@@ -47,14 +37,17 @@ class BlogItemController
      *
      * @return object
      */
-    private function getApiDocument(ServerRequestInterface $request, $id)
+    private function getApiDocument(ServerRequestInterface $request, int $id): object
     {
-        $response = $this->api->withParentRequest($request)->get("/discussions/{$id}");
+        $response = $this->api
+            ->withoutErrorHandling()
+            ->withParentRequest($request)
+            ->get("/discussions/{$id}");
 
         if ($response->getStatusCode() === 404) {
             throw new RouteNotFoundException();
         }
 
-        return json_decode($response->getBody());
+        return json_decode($response->getBody(), false);
     }
 }
