@@ -8,6 +8,21 @@ import applyRuTranslations from '../common/translations/ru';
 app.initializers.add('vadkuz-flarum2-blog', () => {
   applyRuTranslations(app);
 
+  // Prefer support.source for admin "Source" link and normalize trailing ".git".
+  const extension = app.data?.extensions?.['vadkuz-flarum2-blog'];
+  const declaredSource = extension?.support?.source;
+
+  if (extension && typeof declaredSource === 'string' && declaredSource.length) {
+    const normalizedSource = declaredSource.replace(/\.git$/, '');
+
+    extension.links = extension.links || {};
+    extension.links.source = normalizedSource;
+
+    if (extension.source && typeof extension.source === 'object') {
+      extension.source.url = normalizedSource;
+    }
+  }
+
   // Register extension settings page
   app.registry.for('vadkuz-flarum2-blog').registerPage(BlogSettings);
 
