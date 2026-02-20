@@ -4,7 +4,6 @@ import Alert from 'flarum/common/components/Alert';
 import Button from 'flarum/common/components/Button';
 import Dropdown from 'flarum/common/components/Dropdown';
 import BlogPostSettingsModal from './Modals/BlogPostSettingsModal';
-import EditPostComposer from 'flarum/forum/components/EditPostComposer';
 import extractText from 'flarum/common/utils/extractText';
 import ItemList from 'flarum/common/utils/ItemList';
 import RenameArticleModal from './Modals/RenameArticleModal';
@@ -82,8 +81,9 @@ export default class BlogPostController extends Component {
           className: 'Button',
           disabled: !articlePost || !articlePost.canEdit(),
           onclick: () => {
-            app.composer.load(EditPostComposer, { post: articlePost });
-            app.composer.show();
+            app.composer
+              .load(() => import('flarum/forum/components/EditPostComposer'), { post: articlePost })
+              .then(() => app.composer.show());
           },
           icon: 'fas fa-edit',
         },
