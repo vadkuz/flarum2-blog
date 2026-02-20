@@ -15,6 +15,36 @@ export default class BlogPostController extends Component {
     this.loadedPost = false;
   }
 
+  openSeoModal(article, MetaSeoModal) {
+    const showModal = (blogMeta) =>
+      app.modal.show(MetaSeoModal, {
+        objectType: 'blogs',
+        objectId: blogMeta.id(),
+      });
+
+    const existingMeta = article.blogMeta?.();
+    if (existingMeta) {
+      showModal(existingMeta);
+      return;
+    }
+
+    app.store
+      .find('discussions', article.id(), { include: 'blogMeta' })
+      .then((loadedArticle) => {
+        const blogMeta = loadedArticle?.blogMeta?.() || article.blogMeta?.();
+
+        if (!blogMeta) {
+          app.alerts.show(Alert, { type: 'error' }, app.translator.trans('core.lib.error.generic_message'));
+          return;
+        }
+
+        showModal(blogMeta);
+      })
+      .catch(() => {
+        app.alerts.show(Alert, { type: 'error' }, app.translator.trans('core.lib.error.generic_message'));
+      });
+  }
+
   manageArticleButtons() {
     const article = this.attrs.article;
     const items = new ItemList();
@@ -94,18 +124,13 @@ export default class BlogPostController extends Component {
     // Update article SEO
     const seoExt = flarum.extensions['vadkuz-flarum2-seo'];
     const MetaSeoModal = seoExt && seoExt.components ? seoExt.components.MetaSeoModal : null;
-    if (article.blogMeta() && MetaSeoModal && app.forum.attribute('canConfigureSeo')) {
-
+    if (MetaSeoModal && app.forum.attribute('canConfigureSeo')) {
       items.add(
         'seo',
         Button.component(
           {
             className: 'Button',
-            onclick: () =>
-              app.modal.show(MetaSeoModal, {
-                objectType: 'blogs',
-                objectId: article.blogMeta().id(),
-              }),
+            onclick: () => this.openSeoModal(article, MetaSeoModal),
             icon: 'fas fa-search',
           },
           app.translator.trans('vadkuz-flarum2-seo.forum.controls.configure_seo')
