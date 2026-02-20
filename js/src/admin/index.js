@@ -1,6 +1,5 @@
 import { extend } from 'flarum/common/extend';
 import app from 'flarum/admin/app';
-import BasicsPage from 'flarum/admin/components/BasicsPage';
 import PermissionGrid from 'flarum/admin/components/PermissionGrid';
 import BlogSettings from './pages/BlogSettings';
 import applyRuTranslations from '../common/translations/ru';
@@ -74,16 +73,31 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
     );
   });
 
-  extend(BasicsPage.prototype, 'homePageItems', (result, itemsArg) => {
-    const items = itemsArg && typeof itemsArg.add === 'function' ? itemsArg : result;
+  const addBlogToDefaultRoute = () => {
+    app.registry.for('core-basics').setSetting('default_route', (originalSetting) => {
+      if (!originalSetting || originalSetting.type !== 'radio') {
+        return originalSetting;
+      }
 
-    if (!items || typeof items.add !== 'function') {
-      return;
-    }
+      const existingOptions = Array.isArray(originalSetting.options) ? [...originalSetting.options] : [];
+      const hasBlogOption = existingOptions.some((option) => option?.value === '/blog');
 
-    items.add('blog', {
-      path: '/blog',
-      label: app.translator.trans('vadkuz-flarum2-blog.admin.blog'),
+      if (!hasBlogOption) {
+        existingOptions.push({
+          value: '/blog',
+          label: app.translator.trans('vadkuz-flarum2-blog.admin.blog'),
+        });
+      }
+
+      return {
+        ...originalSetting,
+        options: existingOptions,
+      };
     });
-  });
+  };
+
+  // In Flarum 2.x, "default_route" is registered on core-basics via registry settings.
+  // Run once now and once before mount to ensure the setting exists regardless of init order.
+  addBlogToDefaultRoute();
+  app.beforeMount(addBlogToDefaultRoute);
 });
