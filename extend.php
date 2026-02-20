@@ -9,6 +9,8 @@ use Flarum\Api\Resource\ForumResource;
 use Flarum\Api\Schema;
 use Flarum\Discussion\Discussion;
 use Flarum\Discussion\Event\Saving;
+use Flarum\Discussion\Search\DiscussionSearcher;
+use Flarum\Search\Database\DatabaseSearchDriver;
 
 // Controllers
 use Vadkuz\Flarum2Blog\Controller\BlogOverviewController;
@@ -28,6 +30,8 @@ use Vadkuz\Flarum2Blog\Listeners\CreateBlogMetaOnDiscussionCreate;
 // Models
 use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
 use Vadkuz\Flarum2Blog\Util\BlogTags;
+use Vadkuz\Flarum2Blog\Query\BlogArticleFilterGambit;
+use Vadkuz\Flarum2Blog\Query\FilterDiscussionsForBlogPosts;
 
 // SEO
 use Vadkuz\Flarum2Blog\SeoPage\SeoBlogOverviewMeta;
@@ -82,6 +86,10 @@ $extend = [
             Schema\Boolean::make('canApproveBlogPosts')
                 ->get(fn (object $model, Context $context) => $context->getActor()->can('blog.canApprovePosts')),
         ]),
+
+    (new Extend\SearchDriver(DatabaseSearchDriver::class))
+        ->addFilter(DiscussionSearcher::class, BlogArticleFilterGambit::class)
+        ->addMutator(DiscussionSearcher::class, FilterDiscussionsForBlogPosts::class),
 ];
 
 // Define events

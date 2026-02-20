@@ -2,42 +2,45 @@
 
 namespace Vadkuz\Flarum2Blog\Query;
 
-use Flarum\Search\AbstractRegexGambit;
+use Flarum\Search\Database\DatabaseSearchState;
+use Flarum\Search\Filter\FilterInterface;
 use Flarum\Search\SearchState;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Support\Arr;
 use Vadkuz\Flarum2Blog\Util\BlogTags;
 
-class BlogArticleFilterGambit extends AbstractRegexGambit
+/**
+ * @implements FilterInterface<DatabaseSearchState>
+ */
+class BlogArticleFilterGambit implements FilterInterface
 {
-    /**
-     * @var SettingsRepositoryInterface
-     */
     protected $settings;
 
-    /**
-     * @param SettingsRepositoryInterface $settings
-     */
     public function __construct(SettingsRepositoryInterface $settings)
     {
-        // Get Flarum settings
         $this->settings = $settings;
     }
 
-    protected function getGambitPattern()
+    public function getFilterKey(): string
     {
-        return 'is:blog';
+        return 'blog';
     }
 
-    protected function conditions(SearchState $search, array $matches, $negate)
+    public function filter(SearchState $state, string|array $value, bool $negate): void
     {
+        $enabled = filter_var(Arr::first((array) $value), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
+        if ($enabled === false) {
+            return;
+        }
+
         $tagIds = BlogTags::parseTagIds($this->settings->get('blog_tags', ''));
 
-        // If no blog tags are configured, `is:blog` should match nothing.
-        // If negated (`-is:blog`), it should match everything.
         if (count($tagIds) === 0) {
             if (!$negate) {
-                $search->getQuery()->whereRaw('1 = 0');
+                $state->getQuery()->whereRaw('1 = 0');
             }
 
             return;
@@ -45,10 +48,15 @@ class BlogArticleFilterGambit extends AbstractRegexGambit
 
         $method = $negate ? 'whereNotIn' : 'whereIn';
 
-        $search->getQuery()->{$method}('discussions.id', function (Builder $query) use ($tagIds) {
+        $state->getQuery()->{$method}('discussions.id', function (QueryBuilder $query) use ($tagIds) {
             $query->select('discussion_id')
                 ->from('discussion_tag')
-                ->whereIn('tag_id', $tagIds);
+                ->whereIn('tag_id', function (QueryBuilder $subQuery) use ($tagIds) {
+                    $subQuery->select('id')
+                        ->from('tags')
+                        ->whereIn('id', $tagIds)
+                        ->orWhereIn('parent_id', $tagIds);
+                });
         });
     }
 }

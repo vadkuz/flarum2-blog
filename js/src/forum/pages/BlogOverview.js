@@ -56,17 +56,21 @@ export default class BlogOverview extends Page {
   }
 
   reloadData() {
-    let q = `is:blog${m.route.param('slug') ? ` tag:${m.route.param('slug')}` : ''}`;
+    const filter = {
+      blog: '1',
+    };
+
+    if (m.route.param('slug')) {
+      filter.tag = m.route.param('slug');
+    }
 
     if (this.languages !== null && this.languages.length >= 1) {
-      q += ` language:${this.currentSelectedLanguage}`;
+      filter.language = this.currentSelectedLanguage;
     }
 
     app.store
       .find('discussions', {
-        filter: {
-          q,
-        },
+        filter,
         sort: '-createdAt',
       })
       .then(this.show.bind(this))

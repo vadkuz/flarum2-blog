@@ -29,21 +29,21 @@ class BlogOverviewController
     public function __invoke(Document $document, ServerRequestInterface $request)
     {
         $queryParams = $request->getQueryParams();
+        $filter = [
+            'blog' => '1',
+        ];
 
-        $q = "";
-
-        // Add language support
         if ($this->extensionManager->isEnabled("fof-discussion-language")) {
-            $q = "language:{$document->language} ";
+            $filter['language'] = $document->language;
         }
 
-        $q .= "is:blog" . (Arr::get($queryParams, 'category') ? " tag:" . Arr::get($queryParams, 'category') : "");
+        if (Arr::get($queryParams, 'category')) {
+            $filter['tag'] = Arr::get($queryParams, 'category');
+        }
 
         // Preload blog posts
         $apiDocument = $this->getApiDocument($request, [
-            "filter" => [
-                "q" => $q
-            ],
+            "filter" => $filter,
             "sort" => "-createdAt"
         ]);
 
