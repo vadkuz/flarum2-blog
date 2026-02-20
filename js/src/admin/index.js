@@ -74,7 +74,13 @@ app.initializers.add('vadkuz-flarum2-blog', () => {
     );
   });
 
-  extend(BasicsPage.prototype, 'homePageItems', (items) => {
+  extend(BasicsPage.prototype, 'homePageItems', (result, itemsArg) => {
+    const items = itemsArg && typeof itemsArg.add === 'function' ? itemsArg : result;
+
+    if (!items || typeof items.add !== 'function') {
+      return;
+    }
+
     items.add('blog', {
       path: '/blog',
       label: app.translator.trans('vadkuz-flarum2-blog.admin.blog'),
