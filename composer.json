@@ -38,6 +38,7 @@
       "optional-dependencies": [
         "flarum/sticky",
         "fof/discussion-language",
+        "fof/upload",
         "askvortsov/flarum-rich-text",
         "vadkuz/flarum2-seo"
       ]
