@@ -92,7 +92,7 @@ export default class BlogPostController extends Component {
     }
 
     // Update article SEO
-    const seoExt = flarum.extensions['v17development-seo'];
+    const seoExt = flarum.extensions['vadkuz-flarum2-seo'];
     const MetaSeoModal = seoExt && seoExt.components ? seoExt.components.MetaSeoModal : null;
     if (article.blogMeta() && MetaSeoModal && app.forum.attribute('canConfigureSeo')) {
 
@@ -108,7 +108,7 @@ export default class BlogPostController extends Component {
               }),
             icon: 'fas fa-search',
           },
-          app.translator.trans('v17development-flarum-seo.forum.controls.configure_seo')
+          app.translator.trans('vadkuz-flarum2-seo.forum.controls.configure_seo')
         ),
         70
       );

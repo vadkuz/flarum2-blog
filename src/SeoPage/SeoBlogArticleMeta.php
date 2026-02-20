@@ -10,9 +10,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Contracts\Events\Dispatcher;
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use V17Development\FlarumSeo\Page\PageDriverInterface;
-use V17Development\FlarumSeo\SeoMeta\SeoMeta;
-use V17Development\FlarumSeo\SeoProperties;
+use Vadkuz\Flarum2Seo\Page\PageDriverInterface;
+use Vadkuz\Flarum2Seo\SeoMeta\SeoMeta;
+use Vadkuz\Flarum2Seo\SeoProperties;
 
 class SeoBlogArticleMeta implements PageDriverInterface
 {

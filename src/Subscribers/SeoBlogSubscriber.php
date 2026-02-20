@@ -6,9 +6,9 @@ use Flarum\Discussion\Event as DiscussionEvent;
 use Vadkuz\Flarum2Blog\BlogMeta\BlogMeta;
 use Vadkuz\Flarum2Blog\Event\BlogMetaCreated;
 use Vadkuz\Flarum2Blog\Event\BlogMetaSaving;
-use V17Development\FlarumSeo\SeoMeta\SeoMeta;
-use V17Development\FlarumSeo\SeoProperties;
-use V17Development\FlarumSeo\SeoMeta\Event\Created;
+use Vadkuz\Flarum2Seo\SeoMeta\SeoMeta;
+use Vadkuz\Flarum2Seo\SeoProperties;
+use Vadkuz\Flarum2Seo\SeoMeta\Event\Created;
 
 /**
  * Subscribe to discussion creation, update or deleted

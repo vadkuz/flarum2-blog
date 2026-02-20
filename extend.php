@@ -88,9 +88,9 @@ $extend = [
 $events = (new Extend\Event)
     ->listen(Saving::class, CreateBlogMetaOnDiscussionCreate::class);
 
-// Extend Flarum SEO
-if (class_exists("V17Development\FlarumSeo\Extend\SEO")) {
-    $extend[] = (new \V17Development\FlarumSeo\Extend\SEO())
+// Extend Vadkuz SEO (Flarum 2)
+if (class_exists("Vadkuz\Flarum2Seo\Extend\SEO")) {
+    $extend[] = (new \Vadkuz\Flarum2Seo\Extend\SEO())
         ->addExtender("blog_category", SeoBlogOverviewMeta::class)
         ->addExtender("blog_article", SeoBlogArticleMeta::class);
 

@@ -20,11 +20,11 @@
     "ext-json": "*"
   },
   "suggest": {
-    "v17development/flarum-seo": "Adds Flarum SEO and Social media tags",
+    "vadkuz/flarum2-seo": "Adds Flarum 2 SEO and social media tags",
     "fof/upload": "Upload images for blog posts"
   },
   "conflict": {
-    "v17development/flarum-seo": "<=1.8"
+    "v17development/flarum-seo": "*"
   },
   "extra": {
     "flarum-extension": {
@@ -39,7 +39,7 @@
         "flarum/sticky",
         "fof/discussion-language",
         "askvortsov/flarum-rich-text",
-        "v17development/flarum-seo"
+        "vadkuz/flarum2-seo"
       ]
     }
   },
