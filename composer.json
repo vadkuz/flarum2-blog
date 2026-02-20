@@ -3,12 +3,6 @@
   "description": "Blog extension for Flarum 2.x",
   "type": "flarum-extension",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Vadim Kuznetsov"
-    }
-  ],
-  "homepage": "https://github.com/vadkuz/flarum2-blog",
   "support": {
     "issues": "https://github.com/vadkuz/flarum2-blog/issues",
     "source": "https://github.com/vadkuz/flarum2-blog"
@@ -34,7 +28,7 @@
   },
   "extra": {
     "flarum-extension": {
-      "title": "Vadkuz Blog",
+      "title": "Blog Flarum v2",
       "category": "feature",
       "icon": {
         "name": "fas fa-blog",
