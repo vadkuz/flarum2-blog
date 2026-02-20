@@ -55,9 +55,7 @@ export default class BlogItem extends Page {
       setTimeout(this.show.bind(this, preloadBlogOverview), 0);
     } else {
       app.store
-        .find('discussions', m.route.param('id').split('-')[0], {
-          include: 'blogMeta,firstPost',
-        })
+        .find('discussions', m.route.param('id').split('-')[0])
         .then(this.show.bind(this))
         .catch(() => {
           m.redraw();

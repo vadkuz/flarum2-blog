@@ -22,6 +22,7 @@ use Vadkuz\Flarum2Blog\Access\ScopeDiscussionVisibility;
 // API controllers
 use Vadkuz\Flarum2Blog\Api\Controller\CreateBlogMetaController;
 use Vadkuz\Flarum2Blog\Api\Controller\UpdateBlogMetaController;
+use Vadkuz\Flarum2Blog\Api\Controller\ShowBlogMetaByDiscussionController;
 use Vadkuz\Flarum2Blog\Api\Controller\UploadDefaultBlogImageController;
 use Vadkuz\Flarum2Blog\Api\Controller\DeleteDefaultBlogImageController;
 // Listeners
@@ -57,6 +58,7 @@ $extend = [
     (new Extend\Routes('api'))
         ->post('/blogMeta', 'blog.meta', CreateBlogMetaController::class)
         ->patch('/blogMeta/{id}', 'blog.meta.edit', UpdateBlogMetaController::class)
+        ->get('/blogMetaByDiscussion/{id:\\d+}', 'blog.meta.by_discussion', ShowBlogMetaByDiscussionController::class)
         ->post('/blog_default_image', 'blog.default_image.upload', UploadDefaultBlogImageController::class)
         ->delete('/blog_default_image', 'blog.default_image.delete', DeleteDefaultBlogImageController::class),
 

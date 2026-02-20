@@ -16,29 +16,30 @@ export default class BlogPostController extends Component {
   }
 
   openSeoModal(article, MetaSeoModal) {
-    const showModal = (blogMeta) =>
+    const showModal = (blogMetaId) =>
       app.modal.show(MetaSeoModal, {
         objectType: 'blogs',
-        objectId: blogMeta.id(),
+        objectId: blogMetaId,
       });
 
     const existingMeta = article.blogMeta?.();
     if (existingMeta) {
-      showModal(existingMeta);
+      showModal(existingMeta.id());
       return;
     }
 
-    app.store
-      .find('discussions', article.id(), { include: 'blogMeta' })
-      .then((loadedArticle) => {
-        const blogMeta = loadedArticle?.blogMeta?.() || article.blogMeta?.();
-
-        if (!blogMeta) {
+    app.request({
+      method: 'GET',
+      url: `${app.forum.attribute('apiUrl')}/blogMetaByDiscussion/${article.id()}`,
+    })
+      .then((response) => {
+        const blogMetaId = response?.data?.id;
+        if (!blogMetaId) {
           app.alerts.show(Alert, { type: 'error' }, app.translator.trans('core.lib.error.generic_message'));
           return;
         }
 
-        showModal(blogMeta);
+        showModal(blogMetaId);
       })
       .catch(() => {
         app.alerts.show(Alert, { type: 'error' }, app.translator.trans('core.lib.error.generic_message'));
