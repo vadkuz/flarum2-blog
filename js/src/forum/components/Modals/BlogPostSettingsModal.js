@@ -69,6 +69,32 @@ export default class BlogPostSettingsModal extends Modal {
     return file.data?.attributes?.url || null;
   }
 
+  moduleDefault(module) {
+    return module && module.default ? module.default : module;
+  }
+
+  async resolveFoFUploadModules() {
+    const directFileManagerModal = flarum.reg.get('fof-upload', 'forum/components/FileManagerModal');
+    const directUploader = flarum.reg.get('fof-upload', 'forum/handler/Uploader');
+
+    if (directFileManagerModal && directUploader) {
+      return {
+        FileManagerModal: this.moduleDefault(directFileManagerModal),
+        Uploader: this.moduleDefault(directUploader),
+      };
+    }
+
+    const [fileManagerModule, uploaderModule] = await Promise.all([
+      flarum.reg.asyncModuleImport('ext:fof/upload/forum/components/FileManagerModal'),
+      flarum.reg.asyncModuleImport('ext:fof/upload/forum/handler/Uploader'),
+    ]);
+
+    return {
+      FileManagerModal: this.moduleDefault(fileManagerModule),
+      Uploader: this.moduleDefault(uploaderModule),
+    };
+  }
+
   async openFoFUploadModal() {
     if (this.fofUploadState.loading) return;
 
@@ -78,10 +104,7 @@ export default class BlogPostSettingsModal extends Modal {
         this.fofUploadState.error = false;
         m.redraw();
 
-        const [{ default: FileManagerModal }, { default: Uploader }] = await Promise.all([
-          flarum.reg.asyncModuleImport('fof-upload/forum/components/FileManagerModal'),
-          flarum.reg.asyncModuleImport('fof-upload/forum/handler/Uploader'),
-        ]);
+        const { FileManagerModal, Uploader } = await this.resolveFoFUploadModules();
 
         this.fofUploadState.FileManagerModal = FileManagerModal;
         this.fofUploadState.uploader = new Uploader();
