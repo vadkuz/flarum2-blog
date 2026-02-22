@@ -79,8 +79,8 @@ export default class BlogPostSettingsModal extends Modal {
         m.redraw();
 
         const [{ default: FileManagerModal }, { default: Uploader }] = await Promise.all([
-          flarum.reg.asyncModuleImport('ext:fof/upload/forum/components/FileManagerModal'),
-          flarum.reg.asyncModuleImport('ext:fof/upload/forum/handler/Uploader'),
+          flarum.reg.asyncModuleImport('fof-upload/forum/components/FileManagerModal'),
+          flarum.reg.asyncModuleImport('fof-upload/forum/handler/Uploader'),
         ]);
 
         this.fofUploadState.FileManagerModal = FileManagerModal;
