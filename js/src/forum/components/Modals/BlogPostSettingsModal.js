@@ -4,7 +4,6 @@ import Button from 'flarum/common/components/Button';
 import ItemList from 'flarum/common/utils/ItemList';
 import Stream from 'flarum/common/utils/Stream';
 import Switch from 'flarum/common/components/Switch';
-import selectFiles from '../../utils/selectFiles';
 
 export default class BlogPostSettingsModal extends Modal {
   oninit(vnode) {
@@ -25,6 +24,13 @@ export default class BlogPostSettingsModal extends Modal {
     this.isFeatured = Stream(this.meta.isFeatured() || false);
     this.isSized = Stream(this.meta.isSized() || false);
     this.isPendingReview = Stream(this.meta.isPendingReview() || false);
+
+    this.fofUploadState = {
+      loading: false,
+      error: false,
+      FileManagerModal: null,
+      uploader: null,
+    };
   }
 
   className() {
@@ -43,6 +49,73 @@ export default class BlogPostSettingsModal extends Modal {
         </form>
       </div>
     );
+  }
+
+  canUseFoFUpload() {
+    return Boolean(app.forum.attribute('fof-upload.canUpload'));
+  }
+
+  findUploadedFile(fileId) {
+    if (!fileId) return null;
+
+    return app.store.getById('files', fileId) || app.store.getById('shared-files', fileId) || null;
+  }
+
+  getUploadedFileUrl(file) {
+    if (!file) return null;
+
+    if (typeof file.url === 'function') return file.url();
+
+    return file.data?.attributes?.url || null;
+  }
+
+  async openFoFUploadModal() {
+    if (this.fofUploadState.loading) return;
+
+    try {
+      if (!this.fofUploadState.FileManagerModal || !this.fofUploadState.uploader) {
+        this.fofUploadState.loading = true;
+        this.fofUploadState.error = false;
+        m.redraw();
+
+        const [{ default: FileManagerModal }, { default: Uploader }] = await Promise.all([
+          flarum.reg.asyncModuleImport('ext:fof/upload/forum/components/FileManagerModal'),
+          flarum.reg.asyncModuleImport('ext:fof/upload/forum/handler/Uploader'),
+        ]);
+
+        this.fofUploadState.FileManagerModal = FileManagerModal;
+        this.fofUploadState.uploader = new Uploader();
+      }
+
+      app.modal.show(
+        this.fofUploadState.FileManagerModal,
+        {
+          uploader: this.fofUploadState.uploader,
+          onSelect: (selectedFileIds = []) => {
+            const selectedFile = this.findUploadedFile(selectedFileIds[0]);
+            const selectedFileUrl = this.getUploadedFileUrl(selectedFile);
+
+            if (selectedFileUrl) {
+              this.featuredImage(selectedFileUrl);
+            }
+          },
+        },
+        true
+      );
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('[vadkuz/flarum2-blog] FoF Upload integration failed', error);
+      this.fofUploadState.error = true;
+      app.alerts.show(
+        {
+          type: 'error',
+        },
+        app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.upload_unavailable')
+      );
+    } finally {
+      this.fofUploadState.loading = false;
+      m.redraw();
+    }
   }
 
   fields() {
@@ -69,46 +142,23 @@ export default class BlogPostSettingsModal extends Modal {
       30
     );
 
-    let fofUploadButton = null;
-
-    if ('fof-upload' in flarum.extensions && app.forum.attribute('fof-upload.canUpload')) {
-      const uploadExt = flarum.extensions['fof-upload'];
-      const Uploader = uploadExt && uploadExt.components ? uploadExt.components.Uploader : null;
-      const FileManagerModal = uploadExt && uploadExt.components ? uploadExt.components.FileManagerModal : null;
-
-      if (Uploader && FileManagerModal) {
-        const uploader = new Uploader();
-
-        fofUploadButton = (
-          <Button
-            class="Button Button--icon"
-            onclick={async () => {
-              app.modal.show(
-                FileManagerModal,
-                {
-                  uploader: uploader,
-                  onSelect: (files) => {
-                    const file = app.store.getById('files', files[0]);
-
-                    this.featuredImage(file.url());
-                  },
-                },
-                true
-              );
-            }}
-            icon="fas fa-cloud-upload-alt"
-          />
-        );
-      }
-    }
+    const fofUploadEnabled = this.canUseFoFUpload();
 
     items.add(
       'image',
       <div className="Form-group VadkuzBlog-ArticleImage">
         <label>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.title')}:</label>
-        <div data-upload-enabled={!!fofUploadButton}>
+        <div data-upload-enabled={fofUploadEnabled}>
           <input type="text" className="FormControl" bidi={this.featuredImage} placeholder="https://" />
-          {fofUploadButton}
+          {fofUploadEnabled ? (
+            <Button
+              className="Button Button--icon"
+              loading={this.fofUploadState.loading}
+              disabled={this.fofUploadState.loading}
+              onclick={() => this.openFoFUploadModal()}
+              icon="fas fa-cloud-upload-alt"
+            />
+          ) : null}
         </div>
 
         <small>{app.translator.trans('vadkuz-flarum2-blog.forum.article_settings.fields.image.helper_text')}</small>

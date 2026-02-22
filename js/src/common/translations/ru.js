@@ -45,6 +45,7 @@ const ruTranslations = {
   "vadkuz-flarum2-blog.forum.article_settings.fields.highlight.title": "Выделенная статья",
   "vadkuz-flarum2-blog.forum.article_settings.fields.image.helper_text": "Лучшее разрешение для соцсетей: 1200x630",
   "vadkuz-flarum2-blog.forum.article_settings.fields.image.title": "Изображение статьи",
+  "vadkuz-flarum2-blog.forum.article_settings.fields.image.upload_unavailable": "FoF Upload включен, но окно выбора загруженных файлов сейчас недоступно.",
   "vadkuz-flarum2-blog.forum.article_settings.fields.summary.helper_text": "Это описание отображается на странице обзора блога и используется для SEO.",
   "vadkuz-flarum2-blog.forum.article_settings.fields.summary.placeholder": "Введите краткое описание",
   "vadkuz-flarum2-blog.forum.article_settings.fields.summary.title": "Краткое описание статьи",

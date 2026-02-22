@@ -122,6 +122,7 @@ vadkuz-flarum2-blog:
         image:
           title: "Изображение статьи"
           helper_text: "Лучшее разрешение для соцсетей: 1200x630"
+          upload_unavailable: "FoF Upload включен, но окно выбора загруженных файлов сейчас недоступно."
 
         highlight:
           title: "Выделенная статья"
